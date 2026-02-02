@@ -1,19 +1,15 @@
 import { AltitudeMeter } from '@/components/ui/AltitudeMeter';
+import { Sky } from '@/components/zones/Sky';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <AltitudeMeter />
 
-      {/* Temporary content to enable scrolling for testing */}
-      <div className="flex min-h-screen items-center justify-center">
-        <h1 className="text-4xl font-bold">dgautomate.dev</h1>
-      </div>
+      {/* Sky Zone - Hero section */}
+      <Sky />
 
-      {/* Extra sections for scroll testing */}
-      <div className="h-screen flex items-center justify-center bg-sky/20">
-        <p className="text-xl">Sky Zone (~+350ft)</p>
-      </div>
+      {/* Temporary placeholder sections for scroll testing */}
       <div className="h-screen flex items-center justify-center bg-ground-sage/20">
         <p className="text-xl">Forest Zone (~+200ft)</p>
       </div>

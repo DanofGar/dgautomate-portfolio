@@ -39,12 +39,13 @@
 - **Parallel:** Yes - after Phase 1
 - **Completed:** Altitude meter with smooth spring animations, zone indicators, and scroll tracking utilities
 
-### [ ] Task 2.2: Sky Zone
+### [x] Task 2.2: Sky Zone
 - **What:** Hero section with name, warm sky gradient, soft clouds
 - **Why:** First impression, establishes theme
 - **Files:** `src/components/zones/Sky.tsx`, `src/components/effects/Clouds.tsx`
 - **Verify:** Renders at top, clouds have subtle animation
 - **Parallel:** Yes - after Phase 1
+- **Completed:** Sky zone with animated clouds, warm gradient, scroll indicator, and sun glow effect
 
 ### [ ] Task 2.3: Forest Zone
 - **What:** Operations skill domain with tall trees visual, skill cards
@@ -170,8 +171,8 @@
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 1 | In progress |
+| 2. Core Components | 6 | 2 | In progress |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **4** | **20%** |
+| **Total** | **20** | **5** | **25%** |
