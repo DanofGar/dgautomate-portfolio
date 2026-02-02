@@ -31,12 +31,13 @@
 
 ## Phase 2: Core Components (Parallelizable)
 
-### [ ] Task 2.1: Altitude Meter Component
+### [x] Task 2.1: Altitude Meter Component
 - **What:** Floating altitude indicator that updates based on scroll position
 - **Why:** Core navigation element, establishes hiking metaphor
 - **Files:** `src/components/ui/AltitudeMeter.tsx`, `src/lib/scroll-utils.ts`
 - **Verify:** Meter shows +500ft at top, updates smoothly on scroll
 - **Parallel:** Yes - after Phase 1
+- **Completed:** Altitude meter with smooth spring animations, zone indicators, and scroll tracking utilities
 
 ### [ ] Task 2.2: Sky Zone
 - **What:** Hero section with name, warm sky gradient, soft clouds
@@ -169,8 +170,8 @@
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 0 | Not started |
+| 2. Core Components | 6 | 1 | In progress |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **3** | **15%** |
+| **Total** | **20** | **4** | **20%** |
