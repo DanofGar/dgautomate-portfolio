@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Groundhog } from '@/components/ui/Groundhog';
 
-export function UndergroundBurrows() {
+interface UndergroundBurrowsProps {
+  onGroundhogDig?: () => void;
+}
+
+export function UndergroundBurrows({ onGroundhogDig }: UndergroundBurrowsProps) {
   return (
     <section
       className={cn(
@@ -199,12 +203,7 @@ export function UndergroundBurrows() {
         }}
         className="relative z-20 mb-12"
       >
-        <Groundhog
-          onDig={() => {
-            // Will be implemented in Task 3.4 - trigger peel reveal
-            console.log('Groundhog digging - peel reveal will be triggered here');
-          }}
-        />
+        <Groundhog onDig={onGroundhogDig} />
       </motion.div>
     </section>
   );

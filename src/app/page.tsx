@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import { AltitudeMeter } from '@/components/ui/AltitudeMeter';
 import { Sky } from '@/components/zones/Sky';
 import { Forest } from '@/components/zones/Forest';
@@ -5,8 +8,15 @@ import { RockyClimb } from '@/components/zones/RockyClimb';
 import { CoastalOverlook } from '@/components/zones/CoastalOverlook';
 import { UndergroundRoots } from '@/components/zones/UndergroundRoots';
 import { UndergroundBurrows } from '@/components/zones/UndergroundBurrows';
+import { PeelReveal } from '@/components/effects/PeelReveal';
 
 export default function Home() {
+  const [isSecretRevealed, setIsSecretRevealed] = useState(false);
+
+  const handleGroundhogDig = () => {
+    setIsSecretRevealed(true);
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <AltitudeMeter />
@@ -27,12 +37,15 @@ export default function Home() {
       <UndergroundRoots />
 
       {/* Underground Burrows Zone - Deliberate tunnels */}
-      <UndergroundBurrows />
+      <UndergroundBurrows onGroundhogDig={handleGroundhogDig} />
 
-      {/* Temporary placeholder section for scroll testing */}
-      <div className="h-screen flex items-center justify-center bg-datacenter-blue/20">
-        <p className="text-xl">Secret Data Center (~-100ft)</p>
-      </div>
+      {/* Peel reveal effect wrapping the secret data center */}
+      <PeelReveal isRevealed={isSecretRevealed}>
+        {/* Temporary placeholder section for scroll testing */}
+        <div className="h-screen flex items-center justify-center bg-datacenter-blue/20">
+          <p className="text-xl">Secret Data Center (~-100ft)</p>
+        </div>
+      </PeelReveal>
     </main>
   );
 }
