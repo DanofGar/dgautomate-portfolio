@@ -91,12 +91,13 @@
 - **Parallel:** No - after Phase 2 zones complete
 - **Completed:** Organic root network with animated vertical/horizontal roots and node bulbs
 
-### [ ] Task 3.2: Underground Burrows Zone
+### [x] Task 3.2: Underground Burrows Zone
 - **What:** Deliberate tunnels, signs of activity, groundhog appears
 - **Why:** Sets up the secret reveal
 - **Files:** `src/components/zones/UndergroundBurrows.tsx`
 - **Verify:** Tunnel visuals, groundhog visible at bottom
 - **Parallel:** No - depends on 3.1
+- **Completed:** Tunnel network with horizontal passages and vertical shafts, debris and scratch marks showing activity, placeholder groundhog at bottom
 
 ### [ ] Task 3.3: Groundhog Component & Animation
 - **What:** Groundhog that beckons on hover, digs on click
@@ -177,7 +178,7 @@
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
 | 2. Core Components | 6 | 6 | Complete ✓ |
-| 3. Underground | 5 | 1 | In progress |
+| 3. Underground | 5 | 2 | In progress |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **10** | **50%** |
+| **Total** | **20** | **11** | **55%** |
