@@ -99,12 +99,13 @@
 - **Parallel:** No - depends on 3.1
 - **Completed:** Tunnel network with horizontal passages and vertical shafts, debris and scratch marks showing activity, placeholder groundhog at bottom
 
-### [ ] Task 3.3: Groundhog Component & Animation
+### [x] Task 3.3: Groundhog Component & Animation
 - **What:** Groundhog that beckons on hover, digs on click
 - **Why:** The interactive trigger for the secret
 - **Files:** `src/components/ui/Groundhog.tsx`
 - **Verify:** Hover 2s triggers beckon, click triggers dig animation
 - **Parallel:** No - depends on 3.2
+- **Completed:** Interactive groundhog with curious (0-2s hover), beckon (2s+ hover), and dig animations. Includes paw print decorations and tooltip hint.
 
 ### [ ] Task 3.4: Peel Reveal Animation
 - **What:** Page "peels" to reveal data center below
@@ -178,7 +179,7 @@
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
 | 2. Core Components | 6 | 6 | Complete ✓ |
-| 3. Underground | 5 | 2 | In progress |
+| 3. Underground | 5 | 3 | In progress |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **11** | **55%** |
+| **Total** | **20** | **12** | **60%** |

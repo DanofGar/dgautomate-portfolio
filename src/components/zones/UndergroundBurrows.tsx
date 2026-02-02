@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Groundhog } from '@/components/ui/Groundhog';
 
 export function UndergroundBurrows() {
   return (
@@ -184,30 +185,27 @@ export function UndergroundBurrows() {
         </motion.p>
       </div>
 
-      {/* Groundhog placeholder - will be implemented in Task 3.3 */}
-      <div className="relative z-20 mb-12">
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.8,
-            delay: 1,
-            type: 'spring',
-            stiffness: 100,
-            damping: 15,
+      {/* Groundhog - interactive element */}
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.8,
+          delay: 1,
+          type: 'spring',
+          stiffness: 100,
+          damping: 15,
+        }}
+        className="relative z-20 mb-12"
+      >
+        <Groundhog
+          onDig={() => {
+            // Will be implemented in Task 3.4 - trigger peel reveal
+            console.log('Groundhog digging - peel reveal will be triggered here');
           }}
-          className={cn(
-            'w-24 h-24 rounded-full',
-            'bg-gradient-to-br from-amber-700 to-amber-900',
-            'border-4 border-underground-soil',
-            'flex items-center justify-center',
-            'shadow-xl'
-          )}
-        >
-          <span className="text-4xl">🦫</span>
-        </motion.div>
-      </div>
+        />
+      </motion.div>
     </section>
   );
 }
