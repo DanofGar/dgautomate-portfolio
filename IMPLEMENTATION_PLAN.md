@@ -189,9 +189,11 @@ The current implementation (v1.0) delivers:
 
 **What's missing:** Visual design richness, detailed scenery, polished aesthetics, integrated Easter eggs.
 
-**See:** `DESIGN_GAPS.md` for full documentation of design work needed in future branch.
+**See:** `DESIGN_GAPS.md` for full documentation of design work needed.
 
-**v1.0 Goal:** Deploy functional version, then branch for design-focused iteration.
+**Active Branch:** `feature/design-research-components` - Research and implement visual components
+
+**v1.0 Goal:** ✅ Deploy functional version - Complete! Now iterating on design.
 
 ---
 

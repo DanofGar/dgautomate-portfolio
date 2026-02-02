@@ -185,7 +185,7 @@ The current implementation (v1.0) successfully delivers the **functional structu
 
 ---
 
-## Next Steps (for design-focused branch)
+## Next Steps (for design-research-components branch)
 
 ### High Priority
 1. **Secret Data Center scene** - Most visible gap, needs detailed illustration/3D work
