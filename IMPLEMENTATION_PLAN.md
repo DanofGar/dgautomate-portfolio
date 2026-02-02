@@ -20,7 +20,7 @@
 - **Verify:** Can import `motion` from framer-motion
 - **Parallel:** No - depends on 1.1
 
-### [ ] Task 1.3: Set Up Color Palette & Base Styles
+### [x] Task 1.3: Set Up Color Palette & Base Styles
 - **What:** Configure Tailwind with brand colors, dark mode, custom fonts
 - **Why:** Consistent styling across all components
 - **Files:** `tailwind.config.ts`, `src/app/globals.css`
@@ -168,9 +168,9 @@
 
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
-| 1. Scaffold | 3 | 2 | In progress |
+| 1. Scaffold | 3 | 3 | Complete ✓ |
 | 2. Core Components | 6 | 0 | Not started |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **2** | **10%** |
+| **Total** | **20** | **3** | **15%** |
