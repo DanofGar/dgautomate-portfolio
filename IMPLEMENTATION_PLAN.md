@@ -71,12 +71,13 @@
 - **Parallel:** Yes - after Phase 1
 - **Completed:** Coastal zone with ocean horizon, animated waves, systems & automation skills, Indeed Flex proof point
 
-### [ ] Task 2.6: Services Page
+### [x] Task 2.6: Services Page
 - **What:** Placeholder page with "Coming soon" and contact info
 - **Why:** Business contact path separate from hidden form
 - **Files:** `src/app/services/page.tsx`
 - **Verify:** Accessible, shows email and phone
 - **Parallel:** Yes - after Phase 1
+- **Completed:** Services page with Coming Soon message, email contact, and hint about hidden path
 
 ---
 
@@ -174,8 +175,8 @@
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 5 | In progress |
+| 2. Core Components | 6 | 6 | Complete ✓ |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **8** | **40%** |
+| **Total** | **20** | **9** | **45%** |
