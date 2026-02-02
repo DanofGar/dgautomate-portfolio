@@ -9,6 +9,7 @@ import { CoastalOverlook } from '@/components/zones/CoastalOverlook';
 import { UndergroundRoots } from '@/components/zones/UndergroundRoots';
 import { UndergroundBurrows } from '@/components/zones/UndergroundBurrows';
 import { PeelReveal } from '@/components/effects/PeelReveal';
+import { SecretDataCenter } from '@/components/zones/SecretDataCenter';
 
 export default function Home() {
   const [isSecretRevealed, setIsSecretRevealed] = useState(false);
@@ -41,10 +42,7 @@ export default function Home() {
 
       {/* Peel reveal effect wrapping the secret data center */}
       <PeelReveal isRevealed={isSecretRevealed}>
-        {/* Temporary placeholder section for scroll testing */}
-        <div className="h-screen flex items-center justify-center bg-datacenter-blue/20">
-          <p className="text-xl">Secret Data Center (~-100ft)</p>
-        </div>
+        <SecretDataCenter />
       </PeelReveal>
     </main>
   );
