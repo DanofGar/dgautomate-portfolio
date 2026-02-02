@@ -63,12 +63,13 @@
 - **Parallel:** Yes - after Phase 1
 - **Completed:** Rocky terrain with jagged formations, scale & strategy skills, GigaCloud proof point
 
-### [ ] Task 2.5: Coastal Overlook Zone
+### [x] Task 2.5: Coastal Overlook Zone
 - **What:** Systems & Automation skill domain with Pacific visible
 - **Why:** Third skill section (Indeed Flex proof point)
 - **Files:** `src/components/zones/CoastalOverlook.tsx`
 - **Verify:** Renders at sea level (0ft), ocean visible in distance
 - **Parallel:** Yes - after Phase 1
+- **Completed:** Coastal zone with ocean horizon, animated waves, systems & automation skills, Indeed Flex proof point
 
 ### [ ] Task 2.6: Services Page
 - **What:** Placeholder page with "Coming soon" and contact info
@@ -173,8 +174,8 @@
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 4 | In progress |
+| 2. Core Components | 6 | 5 | In progress |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **7** | **35%** |
+| **Total** | **20** | **8** | **40%** |
