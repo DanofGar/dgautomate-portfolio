@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Parallax } from '@/components/effects/Parallax';
 import { cn } from '@/lib/utils';
 import { Groundhog } from '@/components/ui/Groundhog';
 
@@ -21,82 +22,84 @@ export function UndergroundBurrows({ onGroundhogDig }: UndergroundBurrowsProps) 
     >
       {/* Deliberate tunnel network */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Main horizontal tunnels */}
+        {/* Main horizontal tunnels with parallax */}
         {[
-          { y: 20, width: 60, left: 20 },
-          { y: 35, width: 70, left: 10 },
-          { y: 55, width: 50, left: 30 },
-          { y: 70, width: 65, left: 15 },
+          { y: 20, width: 60, left: 20, speed: 0.4 },
+          { y: 35, width: 70, left: 10, speed: 0.5 },
+          { y: 55, width: 50, left: 30, speed: 0.6 },
+          { y: 70, width: 65, left: 15, speed: 0.7 },
         ].map((tunnel, i) => (
-          <motion.div
-            key={`tunnel-${i}`}
-            className="absolute"
-            style={{
-              top: `${tunnel.y}%`,
-              left: `${tunnel.left}%`,
-              width: `${tunnel.width}%`,
-              height: '80px',
-            }}
-            initial={{ scaleX: 0, originX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 1.2,
-              delay: i * 0.2,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {/* Tunnel interior */}
-            <div
-              className={cn(
-                'w-full h-full rounded-full',
-                'bg-underground-soil/60',
-                'border-2 border-underground-brown/40',
-                'shadow-inner'
-              )}
+          <Parallax key={`tunnel-${i}`} speed={tunnel.speed}>
+            <motion.div
+              className="absolute"
               style={{
-                boxShadow: 'inset 0 4px 12px rgba(0, 0, 0, 0.6)',
+                top: `${tunnel.y}%`,
+                left: `${tunnel.left}%`,
+                width: `${tunnel.width}%`,
+                height: '80px',
               }}
-            />
-          </motion.div>
+              initial={{ scaleX: 0, originX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 1.2,
+                delay: i * 0.2,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {/* Tunnel interior */}
+              <div
+                className={cn(
+                  'w-full h-full rounded-full',
+                  'bg-underground-soil/60',
+                  'border-2 border-underground-brown/40',
+                  'shadow-inner'
+                )}
+                style={{
+                  boxShadow: 'inset 0 4px 12px rgba(0, 0, 0, 0.6)',
+                }}
+              />
+            </motion.div>
+          </Parallax>
         ))}
 
-        {/* Vertical shafts connecting tunnels */}
+        {/* Vertical shafts connecting tunnels with parallax */}
         {[
-          { x: 35, top: 20, height: 15 },
-          { x: 50, top: 35, height: 20 },
-          { x: 25, top: 55, height: 15 },
+          { x: 35, top: 20, height: 15, speed: 0.5 },
+          { x: 50, top: 35, height: 20, speed: 0.6 },
+          { x: 25, top: 55, height: 15, speed: 0.4 },
         ].map((shaft, i) => (
-          <motion.div
-            key={`shaft-${i}`}
-            className="absolute"
-            style={{
-              left: `${shaft.x}%`,
-              top: `${shaft.top}%`,
-              width: '60px',
-              height: `${shaft.height}%`,
-            }}
-            initial={{ scaleY: 0, originY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              delay: 0.6 + i * 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <div
-              className={cn(
-                'w-full h-full rounded-full',
-                'bg-underground-soil/60',
-                'border-2 border-underground-brown/40',
-                'shadow-inner'
-              )}
+          <Parallax key={`shaft-${i}`} speed={shaft.speed}>
+            <motion.div
+              className="absolute"
               style={{
-                boxShadow: 'inset 0 4px 12px rgba(0, 0, 0, 0.6)',
+                left: `${shaft.x}%`,
+                top: `${shaft.top}%`,
+                width: '60px',
+                height: `${shaft.height}%`,
               }}
-            />
-          </motion.div>
+              initial={{ scaleY: 0, originY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: 0.6 + i * 0.15,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <div
+                className={cn(
+                  'w-full h-full rounded-full',
+                  'bg-underground-soil/60',
+                  'border-2 border-underground-brown/40',
+                  'shadow-inner'
+                )}
+                style={{
+                  boxShadow: 'inset 0 4px 12px rgba(0, 0, 0, 0.6)',
+                }}
+              />
+            </motion.div>
+          </Parallax>
         ))}
 
         {/* Activity signs - small debris piles */}

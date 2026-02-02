@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Clouds } from '@/components/effects/Clouds';
+import { Parallax } from '@/components/effects/Parallax';
 import { cn } from '@/lib/utils';
 
 export function Sky() {
@@ -94,18 +95,19 @@ export function Sky() {
         </motion.div>
       </div>
 
-      {/* Subtle sun glow in top corner */}
-      <div
-        className={cn(
-          'absolute top-0 right-0',
-          'w-96 h-96 rounded-full',
-          'bg-sky-gold/20 blur-3xl',
-          'pointer-events-none'
-        )}
-        style={{
-          transform: 'translate(50%, -50%)',
-        }}
-      />
+      {/* Subtle sun glow in top corner with parallax */}
+      <Parallax speed={0.2} className="absolute inset-0 pointer-events-none">
+        <div
+          className={cn(
+            'absolute top-0 right-0',
+            'w-96 h-96 rounded-full',
+            'bg-sky-gold/20 blur-3xl'
+          )}
+          style={{
+            transform: 'translate(50%, -50%)',
+          }}
+        />
+      </Parallax>
     </section>
   );
 }

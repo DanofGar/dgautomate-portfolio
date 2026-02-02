@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { SkillCard } from '@/components/ui/SkillCard';
+import { Parallax } from '@/components/effects/Parallax';
 import { cn } from '@/lib/utils';
 
 export function CoastalOverlook() {
@@ -22,67 +23,71 @@ export function CoastalOverlook() {
         'overflow-hidden'
       )}
     >
-      {/* Ocean horizon in background */}
+      {/* Ocean horizon in background with parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Distant ocean */}
-        <div
-          className={cn(
-            'absolute bottom-0 left-0 right-0',
-            'h-1/3',
-            'bg-gradient-to-b from-sky-dark to-sky',
-            'opacity-40'
-          )}
-        />
-
-        {/* Gentle waves */}
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={i}
+        {/* Distant ocean - slowest parallax */}
+        <Parallax speed={0.2}>
+          <div
             className={cn(
-              'absolute',
-              'bg-gradient-to-r from-transparent via-sky-light/30 to-transparent',
-              'h-1'
+              'absolute bottom-0 left-0 right-0',
+              'h-1/3',
+              'bg-gradient-to-b from-sky-dark to-sky',
+              'opacity-40'
             )}
-            style={{
-              bottom: `${5 + i * 3}%`,
-              left: 0,
-              right: 0,
-            }}
-            animate={{
-              x: ['-100%', '100%'],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: i * 1.5,
-            }}
           />
+        </Parallax>
+
+        {/* Gentle waves - medium parallax */}
+        {[...Array(4)].map((_, i) => (
+          <Parallax key={i} speed={0.4}>
+            <motion.div
+              className={cn(
+                'absolute',
+                'bg-gradient-to-r from-transparent via-sky-light/30 to-transparent',
+                'h-1'
+              )}
+              style={{
+                bottom: `${5 + i * 3}%`,
+                left: 0,
+                right: 0,
+              }}
+              animate={{
+                x: ['-100%', '100%'],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                ease: 'linear',
+                delay: i * 1.5,
+              }}
+            />
+          </Parallax>
         ))}
 
-        {/* Coastal vegetation silhouettes */}
+        {/* Coastal vegetation silhouettes - fastest parallax (foreground) */}
         {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={`plant-${i}`}
-            className={cn(
-              'absolute bottom-0',
-              'bg-gradient-to-t from-ground-sage to-transparent',
-              'rounded-t-full opacity-20'
-            )}
-            style={{
-              left: `${15 + i * 15}%`,
-              width: `${30 + Math.random() * 20}px`,
-              height: `${20 + Math.random() * 15}%`,
-            }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 0.2, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              delay: i * 0.1,
-            }}
-          />
+          <Parallax key={`plant-${i}`} speed={0.7}>
+            <motion.div
+              className={cn(
+                'absolute bottom-0',
+                'bg-gradient-to-t from-ground-sage to-transparent',
+                'rounded-t-full opacity-20'
+              )}
+              style={{
+                left: `${15 + i * 15}%`,
+                width: `${30 + Math.random() * 20}px`,
+                height: `${20 + Math.random() * 15}%`,
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 0.2, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: i * 0.1,
+              }}
+            />
+          </Parallax>
         ))}
       </div>
 

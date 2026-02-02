@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { SkillCard } from '@/components/ui/SkillCard';
+import { Parallax } from '@/components/effects/Parallax';
 import { cn } from '@/lib/utils';
 
 export function Forest() {
@@ -22,31 +23,36 @@ export function Forest() {
         'overflow-hidden'
       )}
     >
-      {/* Tree silhouettes in background */}
+      {/* Tree silhouettes in background with parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        {/* Tall trees - using vertical gradients */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={cn(
-              'absolute bottom-0',
-              'bg-gradient-to-t from-underground-brown via-underground-amber to-transparent',
-              'rounded-t-full'
-            )}
-            style={{
-              left: `${10 + i * 12}%`,
-              width: `${40 + Math.random() * 30}px`,
-              height: `${60 + Math.random() * 40}%`,
-            }}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 0.2, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 1,
-              delay: i * 0.1,
-            }}
-          />
-        ))}
+        {/* Tall trees - using vertical gradients with varying parallax speeds */}
+        {[...Array(8)].map((_, i) => {
+          // Alternate between background (slow) and foreground (fast) trees
+          const parallaxSpeed = i % 2 === 0 ? 0.4 : 0.7;
+          return (
+            <Parallax key={i} speed={parallaxSpeed}>
+              <motion.div
+                className={cn(
+                  'absolute bottom-0',
+                  'bg-gradient-to-t from-underground-brown via-underground-amber to-transparent',
+                  'rounded-t-full'
+                )}
+                style={{
+                  left: `${10 + i * 12}%`,
+                  width: `${40 + Math.random() * 30}px`,
+                  height: `${60 + Math.random() * 40}%`,
+                }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 0.2, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1,
+                  delay: i * 0.1,
+                }}
+              />
+            </Parallax>
+          );
+        })}
       </div>
 
       {/* Content */}
