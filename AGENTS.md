@@ -22,24 +22,31 @@
 
 ---
 
-## Build Commands
+## Build Commands (Run in Docker)
+
+**IMPORTANT:** All npm/node commands must run inside Docker for isolation.
 
 ```bash
 # Install dependencies
-npm install
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npm install
 
-# Run development server
-npm run dev
+# Run development server (with port mapping)
+docker run --rm -v "$(pwd)":/workspace -w /workspace -p 3000:3000 dgautomate-dev npm run dev
 
 # Build for production
-npm run build
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npm run build
 
 # Lint
-npm run lint
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npm run lint
 
 # Type check
-npx tsc --noEmit
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npx tsc --noEmit
+
+# Run any command
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev <command>
 ```
+
+**Why Docker?** Isolates node_modules and build processes from the host system. Safer for autonomous execution.
 
 ---
 

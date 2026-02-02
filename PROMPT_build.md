@@ -27,13 +27,19 @@ You are an autonomous AI developer in a build loop for dgautomate.dev.
 - **Don't assume** - Verify file contents before editing
 - **Don't break the build** - Run `npm run build` before committing
 
-## Build Verification
+## Build Verification (Docker)
 
-Before committing, run:
+**IMPORTANT:** Run all npm commands in Docker for isolation:
+
 ```bash
-npm run build
-npx tsc --noEmit
-npm run lint
+# Build must succeed
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npm run build
+
+# No TypeScript errors
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npx tsc --noEmit
+
+# Lint must pass
+docker run --rm -v "$(pwd)":/workspace -w /workspace dgautomate-dev npm run lint
 ```
 
 All must pass. If they fail, fix the issues.
