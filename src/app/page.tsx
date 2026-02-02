@@ -3,6 +3,7 @@ import { Sky } from '@/components/zones/Sky';
 import { Forest } from '@/components/zones/Forest';
 import { RockyClimb } from '@/components/zones/RockyClimb';
 import { CoastalOverlook } from '@/components/zones/CoastalOverlook';
+import { UndergroundRoots } from '@/components/zones/UndergroundRoots';
 
 export default function Home() {
   return (
@@ -21,10 +22,10 @@ export default function Home() {
       {/* Coastal Overlook Zone - Systems & Automation skills */}
       <CoastalOverlook />
 
+      {/* Underground Roots Zone - Transition below surface */}
+      <UndergroundRoots />
+
       {/* Temporary placeholder sections for scroll testing */}
-      <div className="h-screen flex items-center justify-center bg-underground-brown/20">
-        <p className="text-xl">Underground Roots (~-20ft)</p>
-      </div>
       <div className="h-screen flex items-center justify-center bg-underground-soil/20">
         <p className="text-xl">Underground Burrows (~-50ft)</p>
       </div>
