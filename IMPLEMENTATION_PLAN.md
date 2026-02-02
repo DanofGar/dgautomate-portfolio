@@ -13,7 +13,7 @@
 - **Verify:** `npm run dev` starts without errors
 - **Parallel:** No - must complete first
 
-### [ ] Task 1.2: Install Animation Dependencies
+### [x] Task 1.2: Install Animation Dependencies
 - **What:** Add Framer Motion, clsx, tailwind-merge
 - **Why:** Required for scroll animations and conditional styling
 - **Files:** `package.json`, `src/lib/utils.ts` (cn utility)
@@ -168,9 +168,9 @@
 
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
-| 1. Scaffold | 3 | 1 | In progress |
+| 1. Scaffold | 3 | 2 | In progress |
 | 2. Core Components | 6 | 0 | Not started |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **1** | **5%** |
+| **Total** | **20** | **2** | **10%** |
