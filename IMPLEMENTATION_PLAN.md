@@ -177,13 +177,31 @@
 
 ---
 
+## Design Status Note
+
+**IMPORTANT:** Tasks marked as "complete" above are **functionally complete** but **design-incomplete**.
+
+The current implementation (v1.0) delivers:
+- ✅ Full scroll journey structure
+- ✅ All zones and interactions working
+- ✅ Technical foundation solid
+- ✅ Forms, animations, builds passing
+
+**What's missing:** Visual design richness, detailed scenery, polished aesthetics, integrated Easter eggs.
+
+**See:** `DESIGN_GAPS.md` for full documentation of design work needed in future branch.
+
+**v1.0 Goal:** Deploy functional version, then branch for design-focused iteration.
+
+---
+
 ## Progress Tracking
 
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
-| 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 6 | Complete ✓ |
-| 3. Underground | 5 | 5 | Complete ✓ |
-| 4. Polish | 5 | 2 | In progress |
-| 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **16** | **80%** |
+| 1. Scaffold | 3 | 3 | Complete ✓ (functional) |
+| 2. Core Components | 6 | 6 | Complete ✓ (functional) |
+| 3. Underground | 5 | 5 | Complete ✓ (functional) |
+| 4. Polish | 5 | 2 | Design work deferred |
+| 5. Deploy | 1 | 0 | In progress |
+| **Total** | **20** | **16** | **80% functional, design TBD** |
