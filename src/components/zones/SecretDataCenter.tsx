@@ -194,7 +194,26 @@ export function SecretDataCenter() {
             {/* Easter egg - Pickleball paddle */}
             <motion.div
               className="relative cursor-pointer"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{
+                scale: 1.05,
+                rotate: [0, -5, 5, 0],
+                transition: {
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 15,
+                  rotate: {
+                    duration: 0.5,
+                  },
+                },
+              }}
+              whileTap={{
+                scale: 0.95,
+                transition: {
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 20,
+                },
+              }}
               onClick={() => handleEasterEgg('pickleball')}
             >
               <div className="text-4xl">🏓</div>
@@ -202,6 +221,11 @@ export function SecretDataCenter() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20,
+                  }}
                   className="absolute left-16 top-0 bg-background/90 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered"
                 >
                   Pickleball is one of my favorite hobbies!
@@ -221,7 +245,23 @@ export function SecretDataCenter() {
             {/* Terminal with lyrics Easter egg */}
             <motion.div
               className="relative bg-background/60 border border-datacenter-terminal/40 rounded-soft p-4 cursor-pointer"
-              whileHover={{ scale: 1.02 }}
+              whileHover={{
+                scale: 1.02,
+                y: -2,
+                transition: {
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 20,
+                },
+              }}
+              whileTap={{
+                scale: 0.98,
+                transition: {
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 15,
+                },
+              }}
               onClick={() => handleEasterEgg('terminal')}
             >
               <div className="font-mono text-xs text-datacenter-terminal space-y-1">
@@ -272,7 +312,26 @@ export function SecretDataCenter() {
             {/* Hiking reference */}
             <motion.div
               className="relative cursor-pointer"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{
+                scale: 1.05,
+                rotate: [0, 5, -5, 0],
+                transition: {
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 15,
+                  rotate: {
+                    duration: 0.5,
+                  },
+                },
+              }}
+              whileTap={{
+                scale: 0.95,
+                transition: {
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 20,
+                },
+              }}
               onClick={() => handleEasterEgg('singing')}
             >
               <div className="text-4xl">🥾</div>
@@ -280,6 +339,11 @@ export function SecretDataCenter() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20,
+                  }}
                   className="absolute left-16 top-0 bg-background/90 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered"
                 >
                   Garrapata Trail in Big Sur is my favorite!

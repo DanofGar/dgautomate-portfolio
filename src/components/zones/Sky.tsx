@@ -73,11 +73,20 @@ export function Sky() {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
+            whileHover={{
+              scale: 1.1,
+              transition: {
+                type: 'spring',
+                stiffness: 300,
+                damping: 15,
+              },
+            }}
             className={cn(
               'w-8 h-12 rounded-full',
               'border-2 border-background/40',
               'flex items-start justify-center',
-              'p-2'
+              'p-2',
+              'cursor-pointer'
             )}
           >
             <motion.div

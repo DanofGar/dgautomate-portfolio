@@ -83,8 +83,23 @@ export function ContactForm() {
       <motion.button
         type="submit"
         disabled={isSubmitting}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        whileHover={{
+          scale: 1.02,
+          y: -2,
+          transition: {
+            type: 'spring',
+            stiffness: 300,
+            damping: 20,
+          },
+        }}
+        whileTap={{
+          scale: 0.98,
+          transition: {
+            type: 'spring',
+            stiffness: 400,
+            damping: 15,
+          },
+        }}
         className="w-full px-6 py-3 bg-datacenter-terminal/20 border border-datacenter-terminal/50 rounded-soft text-datacenter-terminal font-medium hover:bg-datacenter-terminal/30 focus:outline-none focus:ring-2 focus:ring-datacenter-terminal/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Sending...' : 'Leave a trace'}
