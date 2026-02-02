@@ -1,5 +1,6 @@
 import { AltitudeMeter } from '@/components/ui/AltitudeMeter';
 import { Sky } from '@/components/zones/Sky';
+import { Forest } from '@/components/zones/Forest';
 
 export default function Home() {
   return (
@@ -9,10 +10,10 @@ export default function Home() {
       {/* Sky Zone - Hero section */}
       <Sky />
 
+      {/* Forest Zone - Operations skills */}
+      <Forest />
+
       {/* Temporary placeholder sections for scroll testing */}
-      <div className="h-screen flex items-center justify-center bg-ground-sage/20">
-        <p className="text-xl">Forest Zone (~+200ft)</p>
-      </div>
       <div className="h-screen flex items-center justify-center bg-ground-terracotta/20">
         <p className="text-xl">Rocky Climb (~+50ft)</p>
       </div>

@@ -47,12 +47,13 @@
 - **Parallel:** Yes - after Phase 1
 - **Completed:** Sky zone with animated clouds, warm gradient, scroll indicator, and sun glow effect
 
-### [ ] Task 2.3: Forest Zone
+### [x] Task 2.3: Forest Zone
 - **What:** Operations skill domain with tall trees visual, skill cards
 - **Why:** First skill section (FloraFlex proof point)
 - **Files:** `src/components/zones/Forest.tsx`, `src/components/ui/SkillCard.tsx`
 - **Verify:** Renders below sky, skills display correctly
 - **Parallel:** Yes - after Phase 1
+- **Completed:** Forest zone with animated tree silhouettes, SkillCard component with hover effects, and FloraFlex proof point
 
 ### [ ] Task 2.4: Rocky Climb Zone
 - **What:** Scale & Strategy skill domain with rocky terrain visual
@@ -171,8 +172,8 @@
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 2 | In progress |
+| 2. Core Components | 6 | 3 | In progress |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **5** | **25%** |
+| **Total** | **20** | **6** | **30%** |
