@@ -55,12 +55,13 @@
 - **Parallel:** Yes - after Phase 1
 - **Completed:** Forest zone with animated tree silhouettes, SkillCard component with hover effects, and FloraFlex proof point
 
-### [ ] Task 2.4: Rocky Climb Zone
+### [x] Task 2.4: Rocky Climb Zone
 - **What:** Scale & Strategy skill domain with rocky terrain visual
 - **Why:** Second skill section (GigaCloud proof point)
 - **Files:** `src/components/zones/RockyClimb.tsx`
 - **Verify:** Renders below forest, terrain transition looks natural
 - **Parallel:** Yes - after Phase 1
+- **Completed:** Rocky terrain with jagged formations, scale & strategy skills, GigaCloud proof point
 
 ### [ ] Task 2.5: Coastal Overlook Zone
 - **What:** Systems & Automation skill domain with Pacific visible
@@ -172,8 +173,8 @@
 | Phase | Tasks | Complete | Status |
 |-------|-------|----------|--------|
 | 1. Scaffold | 3 | 3 | Complete ✓ |
-| 2. Core Components | 6 | 3 | In progress |
+| 2. Core Components | 6 | 4 | In progress |
 | 3. Underground | 5 | 0 | Not started |
 | 4. Polish | 5 | 0 | Not started |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **6** | **30%** |
+| **Total** | **20** | **7** | **35%** |
