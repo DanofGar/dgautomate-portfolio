@@ -135,12 +135,13 @@
 - **Parallel:** Yes
 - **Completed:** Created reusable Parallax component using Framer Motion useScroll. Added parallax to all zones with varying speeds (0.2-0.8) for depth. Clouds, terrain elements, ocean, roots, and tunnels all have layered parallax effects.
 
-### [ ] Task 4.2: Spring Physics on Hovers
+### [x] Task 4.2: Spring Physics on Hovers
 - **What:** Add bouncy hover states to interactive elements
 - **Why:** Josh Comeau-style micro-interactions
 - **Files:** Update SkillCard, buttons, interactive elements
 - **Verify:** Hovers feel bouncy and alive
 - **Parallel:** Yes
+- **Completed:** Added spring physics (stiffness: 300, damping: 15-20) to ContactForm button, scroll indicator, and Easter egg elements (pickleball, terminal, hiking boot). All interactive elements now have bouncy, alive micro-interactions.
 
 ### [ ] Task 4.3: Underground Easter Eggs
 - **What:** Clickable pickleball paddle, terminal with lyrics, hobby hints
@@ -183,6 +184,6 @@
 | 1. Scaffold | 3 | 3 | Complete ✓ |
 | 2. Core Components | 6 | 6 | Complete ✓ |
 | 3. Underground | 5 | 5 | Complete ✓ |
-| 4. Polish | 5 | 1 | In progress |
+| 4. Polish | 5 | 2 | In progress |
 | 5. Deploy | 1 | 0 | Not started |
-| **Total** | **20** | **15** | **75%** |
+| **Total** | **20** | **16** | **80%** |
