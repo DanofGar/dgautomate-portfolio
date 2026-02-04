@@ -30,6 +30,11 @@
 - Parallel execution preferred when tasks are independent
 - Use Sonnet for parallel agents
 
+### Ralph Loop Usage
+- **Always use `./loop.sh`** - not raw `while :; do cat PROMPT.md | claude; done`
+- The script checks for `.loop_complete` file to auto-stop
+- Raw while loops run forever and waste API calls
+
 ### Design Philosophy
 - Fun over formal
 - Design shows personality, not words

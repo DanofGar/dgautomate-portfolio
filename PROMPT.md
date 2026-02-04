@@ -102,6 +102,7 @@ Commit after each working increment:
 
 ## Exit Conditions
 
+### Per-Iteration Exit
 Exit this iteration when you've made meaningful progress and committed it. Don't try to do everything in one pass - the loop will bring you back.
 
 Good stopping points:
@@ -111,3 +112,15 @@ Good stopping points:
 - Easter egg functional
 
 Commit your progress before exiting.
+
+### Loop Completion (IMPORTANT)
+When ALL requirements are fully implemented and verified:
+1. Run `touch .loop_complete` to signal the loop to stop
+2. Then exit normally
+
+**Only create `.loop_complete` when:**
+- All 5 Notion checkpoints are logged
+- Build passes (`npm run build`)
+- All features listed above are implemented and committed
+
+Do NOT create `.loop_complete` if there's still work remaining.

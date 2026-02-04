@@ -2,28 +2,15 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ContactForm } from '@/components/ui/ContactForm';
+import { VideoBackground } from '@/components/effects/VideoBackground';
 
 interface EasterEggState {
   pickleball: boolean;
   terminal: boolean;
   singing: boolean;
 }
-
-// Character asset paths
-const CHARACTERS = {
-  scientist: '/assets/characters/groundhog-scientist-v2.png',
-  coffeeRunner: '/assets/characters/coffee-runner.png',
-  securityGuard: '/assets/characters/security-guard.png',
-  networkEngineer: '/assets/characters/network-engineer.png',
-  serverTechnician: '/assets/characters/server-technician.png',
-  dataAnalyst: '/assets/characters/data-analyst.png',
-  seniorArchitect: '/assets/characters/senior-architect.png',
-  intern: '/assets/characters/intern.png',
-  karaokeSinger: '/assets/characters/karaoke-singer.png',
-} as const;
 
 // Karaoke lyrics for the terminal easter egg
 const KARAOKE_LYRICS = [
@@ -37,109 +24,6 @@ const KARAOKE_LYRICS = [
   { text: "Hey! Alright now!", highlight: false },
   { text: "And don't it feel good!", highlight: false },
 ];
-
-// Stationary character component with optional subtle breathing animation
-function StationaryCharacter({
-  src,
-  alt,
-  className,
-  style,
-  breathe = true,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-  style?: React.CSSProperties;
-  breathe?: boolean;
-}) {
-  return (
-    <motion.div
-      className={cn('absolute pointer-events-none select-none', className)}
-      style={style}
-      animate={
-        breathe
-          ? {
-              scale: [1, 1.015, 1],
-            }
-          : undefined
-      }
-      transition={
-        breathe
-          ? {
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }
-          : undefined
-      }
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={120}
-        height={160}
-        className="w-auto h-auto max-h-[120px] md:max-h-[160px] object-contain"
-        priority={false}
-      />
-    </motion.div>
-  );
-}
-
-// Animated character component for movers (Coffee Runner, Security Guard)
-function AnimatedMover({
-  src,
-  alt,
-  direction = 'right',
-  duration = 10,
-  className,
-}: {
-  src: string;
-  alt: string;
-  direction?: 'left' | 'right';
-  duration?: number;
-  className?: string;
-}) {
-  const startX = direction === 'right' ? '-10%' : '90%';
-  const endX = direction === 'right' ? '90%' : '-10%';
-
-  return (
-    <motion.div
-      className={cn(
-        'absolute bottom-[15%] pointer-events-none select-none hidden md:block',
-        className
-      )}
-      initial={{ x: startX }}
-      animate={{
-        x: [startX, endX, startX],
-        y: [0, -3, 0, -3, 0],
-      }}
-      transition={{
-        x: {
-          duration: duration,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        },
-        y: {
-          duration: 0.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        },
-      }}
-      style={{ zIndex: 30 }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={100}
-        height={140}
-        className="w-auto h-auto max-h-[100px] md:max-h-[140px] object-contain"
-        style={{
-          transform: direction === 'left' ? 'scaleX(-1)' : 'none',
-        }}
-      />
-    </motion.div>
-  );
-}
 
 // Lyrics terminal component with scrolling animation
 function LyricsTerminal({ isActive }: { isActive: boolean }) {
@@ -221,108 +105,18 @@ export function SecretDataCenter() {
         'overflow-hidden'
       )}
     >
-      {/* Background image layer */}
-      <div className="absolute inset-0">
-        <Image
-          src="/assets/datacenter/datacenter-background-v3.png"
-          alt="Secret underground data center"
-          fill
-          className="object-cover object-center"
-          priority
-          quality={90}
-        />
-        {/* Overlay gradient for depth and text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background/60" />
-      </div>
+      {/* Video background layer - Veo 3 generated groundhog data center */}
+      <VideoBackground
+        src="/assets/videos/datacenter-loop.mp4"
+        poster="/assets/datacenter/datacenter-background-v3.png"
+        overlay={true}
+        overlayClassName="from-transparent via-background/10 to-background/50"
+      />
 
-      {/* Character layers - Stationary characters at workstations */}
+      {/* Lyrics Terminal Easter Egg - overlay on video */}
       <div className="absolute inset-0" style={{ zIndex: 10 }}>
-        {/* Scientist - Central workstation */}
-        <StationaryCharacter
-          src={CHARACTERS.scientist}
-          alt="Groundhog scientist at central workstation"
-          style={{ left: '45%', bottom: '35%' }}
-        />
-
-        {/* Network Engineer - Server rack area (left side) */}
-        <StationaryCharacter
-          src={CHARACTERS.networkEngineer}
-          alt="Network engineer groundhog at server rack"
-          style={{ left: '12%', bottom: '38%' }}
-        />
-
-        {/* Server Technician - Crouched at panel */}
-        <StationaryCharacter
-          src={CHARACTERS.serverTechnician}
-          alt="Server technician groundhog at panel"
-          style={{ left: '22%', bottom: '28%' }}
-        />
-
-        {/* Data Analyst - At monitors */}
-        <StationaryCharacter
-          src={CHARACTERS.dataAnalyst}
-          alt="Data analyst groundhog studying charts"
-          style={{ left: '55%', bottom: '40%' }}
-        />
-
-        {/* Senior Architect - Drafting desk (right area) */}
-        <StationaryCharacter
-          src={CHARACTERS.seniorArchitect}
-          alt="Senior architect groundhog at drafting desk"
-          style={{ right: '25%', bottom: '35%' }}
-        />
-
-        {/* Intern - Supply area with boxes */}
-        <StationaryCharacter
-          src={CHARACTERS.intern}
-          alt="Intern groundhog carrying boxes"
-          style={{ right: '8%', bottom: '25%' }}
-          breathe={false}
-        />
-
-        {/* Karaoke Singer - Next to lyrics terminal */}
-        <motion.div
-          className="absolute pointer-events-none select-none"
-          style={{ right: '12%', bottom: '32%', zIndex: 20 }}
-          animate={{
-            rotate: [-3, 3, -3],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        >
-          <Image
-            src={CHARACTERS.karaokeSinger}
-            alt="Karaoke singer groundhog performing"
-            width={120}
-            height={160}
-            className="w-auto h-auto max-h-[120px] md:max-h-[160px] object-contain"
-          />
-        </motion.div>
-
-        {/* Lyrics Terminal Easter Egg - next to Karaoke Singer */}
         <LyricsTerminal isActive={true} />
       </div>
-
-      {/* Animated movers - highest z-index for foreground movement */}
-      {/* Coffee Runner - slides left to right, 8-10s loop */}
-      <AnimatedMover
-        src={CHARACTERS.coffeeRunner}
-        alt="Coffee runner groundhog with tray"
-        direction="right"
-        duration={9}
-      />
-
-      {/* Security Guard - patrols opposite direction, slower 12s loop */}
-      <AnimatedMover
-        src={CHARACTERS.securityGuard}
-        alt="Security guard groundhog on patrol"
-        direction="left"
-        duration={12}
-        className="bottom-[20%]"
-      />
 
       {/* Content overlay - Header and contact form */}
       <div className="relative z-40 flex flex-col min-h-[100vh] md:min-h-[120vh]">

@@ -187,3 +187,44 @@ MVP is complete when:
 - [ ] Mobile responsive (journey intact)
 - [ ] `npm run build` passes
 - [ ] Deploys to Netlify successfully
+
+---
+
+## Ralph Loop Completion Signal
+
+When running in a Ralph Wiggum loop (`./loop.sh` or `while :; do cat PROMPT.md | claude; done`):
+
+### How to Signal Completion
+```bash
+touch .loop_complete
+```
+
+This file tells `loop.sh` to stop iterating.
+
+### When to Signal Completion
+Only create `.loop_complete` when:
+1. **All task requirements are implemented** - not just "good progress"
+2. **Build passes** - `npm run build` succeeds
+3. **Committed** - changes are in git
+4. **Verified** - you've confirmed the feature works
+
+### When NOT to Signal
+- Partial implementation (let the loop continue)
+- Build errors exist
+- "Looks done" but not verified
+- Any TODO items remain in the prompt
+
+### Template for PROMPT.md Exit Section
+```markdown
+## Exit Conditions
+
+### Per-Iteration Exit
+Exit after meaningful progress. Commit before exiting.
+
+### Loop Completion
+When ALL requirements are done:
+1. Run `touch .loop_complete`
+2. Exit normally
+
+Only signal completion when fully verified.
+```
