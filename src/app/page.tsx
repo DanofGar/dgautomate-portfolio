@@ -3,9 +3,7 @@
 import { useState } from 'react';
 import { AltitudeMeter } from '@/components/ui/AltitudeMeter';
 import { Sky } from '@/components/zones/Sky';
-import { Forest } from '@/components/zones/Forest';
-import { RockyClimb } from '@/components/zones/RockyClimb';
-import { CoastalOverlook } from '@/components/zones/CoastalOverlook';
+import { StorySection } from '@/components/zones/StorySection';
 import { UndergroundRoots } from '@/components/zones/UndergroundRoots';
 import { UndergroundBurrows } from '@/components/zones/UndergroundBurrows';
 import { PeelReveal } from '@/components/effects/PeelReveal';
@@ -25,14 +23,8 @@ export default function Home() {
       {/* Sky Zone - Hero section */}
       <Sky />
 
-      {/* Forest Zone - Operations skills */}
-      <Forest />
-
-      {/* Rocky Climb Zone - Scale & Strategy skills */}
-      <RockyClimb />
-
-      {/* Coastal Overlook Zone - Systems & Automation skills */}
-      <CoastalOverlook />
+      {/* Story Section - Sticky scroll through Forest, Rocky, Coastal */}
+      <StorySection />
 
       {/* Underground Roots Zone - Transition below surface */}
       <UndergroundRoots />
