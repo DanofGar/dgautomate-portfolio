@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ContactForm } from '@/components/ui/ContactForm';
+import { BackgroundBeams } from '@/components/ui/background-beams';
+import { Particles } from '@/components/ui/particles';
 
 interface EasterEggState {
   pickleball: boolean;
@@ -218,11 +220,26 @@ export function SecretDataCenter() {
       className={cn(
         'relative w-full',
         'min-h-[100vh] md:min-h-[120vh]',
-        'overflow-hidden'
+        'overflow-hidden',
+        'bg-[#1a1a1a]'
       )}
     >
+      {/* Background Beams - base layer */}
+      <BackgroundBeams className="absolute inset-0 z-0" />
+
+      {/* Green data stream particles */}
+      <Particles
+        className="absolute inset-0 z-5"
+        color="#22C55E"
+        quantity={50}
+        size={1}
+        vx={0.5}
+        vy={-0.2}
+        staticity={20}
+      />
+
       {/* Background image layer */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-10">
         <Image
           src="/assets/datacenter/datacenter-background-v3.png"
           alt="Secret underground data center"
