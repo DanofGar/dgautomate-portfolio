@@ -1,121 +1,182 @@
-# Zone Integration & Visual Polish Loop
+# Card-Based Portfolio - Integration Loop
 
 ## Your Mission
-Integrate wildlife sprites and zone transitions into the portfolio. Make the page flow seamlessly between zones. Make the text more casual and creative. The page should feel like descending a Big Sur coastal trail.
+Build a card-based storytelling portfolio with scenic backdrops, subtle wildlife animations, and an ambitious datacenter reveal. Desktop-first, mobile-simplified.
 
-## Context Files (Read First)
-- `STYLING_GUIDE.md` - Physics zones, component libraries (Aceternity, Magic UI, Shadcn), color palette
-- `CONTINUE-SESSION.md` - Current state and what's been done
-- `src/components/zones/*.tsx` - Existing zone components to update
-- `src/components/effects/ZoneBackground.tsx` - New background component with gradient transitions
-- `src/components/ui/WildlifeSprite.tsx` - New wildlife sprite component with hover tooltips
-- `src/styles/zone-transitions.css` - CSS for zone blending
+## READ THESE FIRST
+- `CONTINUE-SESSION.md` - Full context and decisions
+- `docs/plans/2026-02-04-card-layout-design.md` - Card layout spec
+- `STYLING_GUIDE.md` - Animation physics, component libraries
+
+## The New Layout
+
+```
+┌─────────────────────────────────────┐
+│  HERO (Sky background)              │
+│  "Welcome" + name + one-liner       │
+│  [pelican - subtle bob animation]   │
+└─────────────────────────────────────┘
+          ↓ scroll-triggered
+┌─────────────────────────────────────┐
+│  CARD 1 (Forest background)         │
+│  Headline + paragraph               │
+│  Sales → People skills story        │
+│  [banana slug, jay - bobbing]       │
+└─────────────────────────────────────┘
+          ↓ scroll-triggered
+┌─────────────────────────────────────┐
+│  CARD 2 (Rocky background)          │
+│  Headline + paragraph               │
+│  Technical / problem-solving        │
+│  [quail, lizard - bobbing]          │
+└─────────────────────────────────────┘
+          ↓ scroll-triggered
+┌─────────────────────────────────────┐
+│  CARD 3 (Coastal background)        │
+│  Headline + paragraph               │
+│  AI/automation pivot                │
+│  [sea otter - bobbing]              │
+└─────────────────────────────────────┘
+          ↓ scroll-triggered
+┌─────────────────────────────────────┐
+│  DATACENTER (The Showstopper)       │
+│  Animated groundhogs                │
+│  Easter eggs                        │
+│  Terminal contact + LinkedIn link   │
+└─────────────────────────────────────┘
+```
 
 ## Assets Available
+
 ```
 public/assets/
 ├── sky/
-│   ├── sky-background-v2.png (photorealistic background)
+│   ├── sky-background-v2.png
 │   └── wildlife/pelican-silhouette.png
 ├── forest/
-│   ├── forest-background-v2.png (photorealistic background)
+│   ├── forest-background-v2.png
 │   └── wildlife/banana-slug-small.png, stellers-jay-realistic.png
 ├── rocky/
-│   ├── rocky-climb-v2.png (photorealistic background)
+│   ├── rocky-climb-v2.png
 │   └── wildlife/california-quail-realistic.png, fence-lizard-realistic.png
 ├── coastal/
-│   ├── coastal-overlook-v2.png (photorealistic background)
+│   ├── coastal-overlook-v2.png
 │   └── wildlife/sea-otter-realistic.png, cormorant-realistic.png
 ├── burrows/
-│   └── underground-transition-v2.png (photorealistic background)
+│   └── underground-transition-v2.png (transition to datacenter)
 ├── datacenter/
-│   └── datacenter-background-v3.png (photorealistic background)
-└── characters/*.png (groundhog characters for datacenter)
+│   └── datacenter-background-v3.png
+└── characters/*.png (9 groundhog characters)
 ```
 
-## Task Checklist (Check Off As You Complete)
+## Task Checklist
 
-### Phase 1: Zone Background Integration
-- [ ] Sky.tsx - Replace CSS gradients with ZoneBackground component + background image
-- [ ] Forest.tsx - Replace CSS gradients with ZoneBackground component + background image
-- [ ] RockyClimb.tsx - Replace CSS gradients with ZoneBackground component + background image
-- [ ] CoastalOverlook.tsx - Replace CSS gradients with ZoneBackground component + background image
-- [ ] UndergroundBurrows.tsx - Replace CSS gradients with ZoneBackground component + background image
-- [ ] Verify gradient transitions blend zones smoothly (scroll test)
+### Phase 1: Card Layout Structure
+- [ ] Create `StoryCard.tsx` component (background + content + wildlife slot)
+- [ ] Update `page.tsx` to use card layout instead of zone sections
+- [ ] Each card: full viewport height, scroll-triggered text animation
+- [ ] Text animation: Framer Motion fade+slide (opacity 0→1, y 30→0)
 
-### Phase 2: Wildlife Sprites
-- [ ] Add pelican to Sky zone (small, top-right area, drifting animation)
-- [ ] Add banana slug + Steller's jay to Forest zone (subtle placement)
-- [ ] Add quail + lizard to Rocky zone (on rocks, small scale)
-- [ ] Add sea otter to Coastal zone (lower left, in water area)
-- [ ] Add hover tooltips with fun facts for each creature
+### Phase 2: Desktop Wildlife (bobbing animation)
+- [ ] Create wildlife bobbing animation (subtle translateY oscillation)
+- [ ] Add pelican to Hero (top-right area)
+- [ ] Add slug + jay to Forest card
+- [ ] Add quail + lizard to Rocky card
+- [ ] Add sea otter to Coastal card
+- [ ] Ensure wildlife doesn't overlap text areas
 
-### Phase 3: Text & Copy Refresh
-- [ ] Sky hero text - Casual, personality-driven intro (not resume-speak)
-- [ ] Forest text - Creative way to show operations skills
-- [ ] Rocky text - Engaging description of technical abilities
-- [ ] Coastal text - Natural flow into underground transition
-- [ ] Overall - Remove corporate buzzwords, add voice
+### Phase 3: Mobile Experience
+- [ ] Create `MobileLandscapePrompt.tsx` - obvious modal/banner on portrait
+- [ ] Hide wildlife on mobile (viewport < 768px)
+- [ ] Use gradient overlay (Option B) for text readability on mobile
+- [ ] Test at 375px width portrait AND landscape
 
-### Phase 4: Visual Enhancements (from STYLING_GUIDE.md)
-- [ ] Add Aceternity particles or Aurora effect to Sky zone
-- [ ] Add dappled light overlay effect to Forest zone
-- [ ] Add subtle wind/grass movement to Rocky zone
-- [ ] Add water sparkle or wave effect to Coastal zone
-- [ ] Consider Magic UI Dock for navigation
+### Phase 4: Content Writing
+- [ ] Hero: Name + one-liner ("I build systems that work while I sleep")
+- [ ] Card 1 (Forest): Sales background → people skills
+- [ ] Card 2 (Rocky): Technical grounding → problem-solving
+- [ ] Card 3 (Coastal): AI/automation passion → the pivot
+- [ ] Keep it casual, conversational, NOT resume-speak
 
-### Phase 5: Verification (REQUIRED before marking complete)
+### Phase 5: Datacenter Showstopper (BE AMBITIOUS)
+- [ ] Background with parallax layers
+- [ ] Animated Coffee Runner (8-10s loop, walks across)
+- [ ] Animated Security Guard (12s loop, opposite direction)
+- [ ] Stationary groundhogs at workstations (subtle breathing/typing)
+- [ ] Blinking server LEDs (CSS animation)
+- [ ] Floating dust particles in light beams
+- [ ] Lyrics terminal easter egg (scrolling karaoke text)
+- [ ] Hover groundhogs → job title tooltip
+- [ ] Terminal-style contact form
+- [ ] LinkedIn link prominently placed
+- [ ] Optional: Reveal animation (lights flicker on)
+
+### Phase 6: Polish & Verification
 - [ ] Run `npm run dev` - no errors
-- [ ] Scroll through entire page - transitions smooth
-- [ ] Test wildlife hover tooltips
-- [ ] Test mobile viewport (resize to 375px width)
-- [ ] Take screenshots of each zone to `/tmp/zone-screenshots/`
+- [ ] Scroll through entire page - animations trigger correctly
+- [ ] Test mobile portrait - landscape prompt appears
+- [ ] Test mobile landscape - simplified but functional
+- [ ] Test wildlife bobbing animations
+- [ ] Test datacenter character animations
 - [ ] Run `npm run build` - no errors
+- [ ] Take screenshots: `./scripts/take-zone-screenshots.sh`
 
-## Style Guidelines
+### Phase 7: Mobile Asset Generation (Optional)
+- [ ] Generate 9:16 versions of backgrounds for mobile landscape
+- [ ] Save to `public/assets/[zone]/[zone]-mobile.png`
+- [ ] Leave for user approval before integrating
 
-### Physics Zones (from STYLING_GUIDE.md)
-- **Coastal physics** (slow, drifting): Hero text, parallax, emotional content
-- **Technical physics** (snappy): Buttons, forms, navigation
-- **Flora physics** (organic growth): Timelines, skill trees
+## Animation Specs
 
-### Colors - Marine Layer Palette
+### Wildlife Bobbing
+```tsx
+// Subtle vertical oscillation
+animate={{ y: [0, -5, 0] }}
+transition={{
+  duration: 3,
+  ease: "easeInOut",
+  repeat: Infinity
+}}
 ```
-deep-ocean: oklch(25% 0.1 240)
-sea-foam: oklch(85% 0.05 190)
-wet-sand: oklch(80% 0.08 80)
-granite: oklch(40% 0.02 260)
-sunset: oklch(70% 0.2 40)
+
+### Text Scroll Reveal
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  viewport={{ once: true, margin: "-100px" }}
+>
 ```
 
-### Text Tone
-- Casual, conversational, shows personality
-- NOT: "Results-driven professional with 10+ years..."
-- YES: "I build systems that don't break at 3am"
-- Show don't tell - proof points with real numbers
+### Coffee Runner Walk
+```tsx
+// 8-10 second loop, left to right with vertical bob
+animate={{
+  x: ["0%", "80%", "0%"],
+  y: [0, -3, 0, -3, 0] // synced bob
+}}
+transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+```
 
-### Wildlife Placement
-- Small, subtle accents (3-8% of viewport width)
-- Natural positions (bird in sky, slug on log, otter in water)
-- Don't compete with content for attention
+## Mobile Landscape Prompt
 
-## Verification Commands
-```bash
-# Start dev server
-npm run dev
-
-# Take screenshots (use after visual changes)
-# Install playwright if needed: npx playwright install chromium
-npx playwright screenshot http://localhost:3000 /tmp/zone-screenshots/full-page.png --full-page
-
-# Build check
-npm run build
+Create obvious prompt when `window.innerWidth < 768 && portrait orientation`:
+```
+┌────────────────────────────┐
+│  📱↔️                       │
+│                            │
+│  For the best experience,  │
+│  please rotate your phone  │
+│  to landscape mode         │
+│                            │
+│  [Continue anyway]         │
+└────────────────────────────┘
 ```
 
 ## Commit Protocol
-After completing a meaningful chunk of work:
 ```bash
-git add -A && git commit -m "feat(zones): [what you did]
+git add -A && git commit -m "feat(cards): [what you did]
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
@@ -123,18 +184,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ## Exit Conditions
 
 ### Per-Iteration
-Complete ONE logical chunk from the checklist, commit it, then exit.
-Good stopping points:
-- One zone fully updated with ZoneBackground
-- Wildlife sprites added to one zone
-- Text refreshed for one zone
-- One visual enhancement added
+Complete ONE phase or significant chunk, commit, then exit.
 
 ### Loop Completion
-When ALL checkboxes above are checked:
-1. Run verification commands
-2. Take final screenshots
-3. Run `touch .loop_complete`
+When ALL phases complete:
+1. Run full verification
+2. Take screenshots
+3. `touch .loop_complete`
 4. Exit
-
-**Only create `.loop_complete` when everything is done and verified.**
