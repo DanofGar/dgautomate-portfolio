@@ -14,7 +14,7 @@ Design specification for the revised secret data center scene and groundhog char
 |----------|--------|
 | Animation approach | CSS transforms (translateX + slight bob) |
 | Animated characters | Coffee Runner, Security Guard (2 movers) |
-| Data center layout | Single floor, wide horizontal composition |
+| Data center layout | Two floors with mezzanine, spacious wide composition |
 | Total characters | 9 (8 new/positioned + 1 existing scientist) |
 
 ---
@@ -22,9 +22,9 @@ Design specification for the revised secret data center scene and groundhog char
 ## Data Center Scene Composition
 
 ### Layout
-- Single floor, wide horizontal composition (16:9 aspect ratio)
-- Camera angle: Slightly elevated perspective looking across the floor
-- Depth: Server racks in background, workstations in mid-ground, open floor for animated characters
+- Two floors with mezzanine catwalk, wide horizontal composition (16:9 aspect ratio)
+- Camera angle: Slightly elevated perspective looking across both levels
+- Depth: Server racks on upper level, workstations on main floor, open floor area for animated characters
 
 ### Key Areas (left to right)
 1. **Entry/Security desk** - Security Guard patrol start
