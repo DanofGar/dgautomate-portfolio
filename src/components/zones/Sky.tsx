@@ -2,19 +2,29 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { AuroraBackground } from '@/components/ui/aurora-background';
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
 import { cn } from '@/lib/utils';
 
 export function Sky() {
   return (
-    <AuroraBackground
-      className="min-h-screen"
-      showRadialGradient={false}
-    >
+    <section className="relative min-h-screen w-full overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/assets/sky/hero-sky-v1.png"
+          alt="California sky at golden hour"
+          fill
+          className="object-cover"
+          priority
+          quality={90}
+        />
+        {/* Subtle overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
+      </div>
+
       {/* Main content */}
-      <div className="relative z-10 text-center px-4 flex flex-col items-center justify-center">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-4">
         {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -26,7 +36,7 @@ export function Sky() {
           }}
           className={cn(
             'text-6xl md:text-8xl font-bold',
-            'text-slate-900 dark:text-white',
+            'text-white drop-shadow-lg',
             'mb-6'
           )}
         >
@@ -37,7 +47,7 @@ export function Sky() {
         <div className="max-w-2xl">
           <TextGenerateEffect
             words="I build systems that work while I sleep."
-            className="text-xl md:text-2xl text-slate-700 dark:text-slate-200"
+            className="text-xl md:text-2xl text-white/90 drop-shadow-md"
             duration={0.6}
           />
         </div>
@@ -54,7 +64,7 @@ export function Sky() {
                 alt="Pelican silhouette"
                 width={96}
                 height={96}
-                className="object-contain opacity-70 dark:opacity-50"
+                className="object-contain opacity-80 drop-shadow-lg"
               />
             </CardItem>
           </CardBody>
@@ -81,14 +91,14 @@ export function Sky() {
             }}
             className={cn(
               'w-8 h-12 rounded-full',
-              'border-2 border-slate-400/40 dark:border-white/40',
+              'border-2 border-white/40',
               'flex items-start justify-center',
               'p-2',
               'cursor-pointer'
             )}
           >
             <motion.div
-              className="w-2 h-2 rounded-full bg-slate-500/60 dark:bg-white/60"
+              className="w-2 h-2 rounded-full bg-white/60"
               animate={{
                 opacity: [0.6, 1, 0.6],
               }}
@@ -101,6 +111,6 @@ export function Sky() {
           </motion.div>
         </motion.div>
       </div>
-    </AuroraBackground>
+    </section>
   );
 }
