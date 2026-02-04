@@ -8,6 +8,7 @@ import { UndergroundRoots } from '@/components/zones/UndergroundRoots';
 import { UndergroundBurrows } from '@/components/zones/UndergroundBurrows';
 import { PeelReveal } from '@/components/effects/PeelReveal';
 import { SecretDataCenter } from '@/components/zones/SecretDataCenter';
+import { Navigation } from '@/components/ui/Navigation';
 
 export default function Home() {
   const [isSecretRevealed, setIsSecretRevealed] = useState(false);
@@ -19,9 +20,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <AltitudeMeter />
+      <Navigation />
 
       {/* Sky Zone - Hero section */}
-      <Sky />
+      <div id="hero">
+        <Sky />
+      </div>
 
       {/* Story Section - Sticky scroll through Forest, Rocky, Coastal */}
       <StorySection />
@@ -33,9 +37,11 @@ export default function Home() {
       <UndergroundBurrows onGroundhogDig={handleGroundhogDig} />
 
       {/* Peel reveal effect wrapping the secret data center */}
-      <PeelReveal isRevealed={isSecretRevealed}>
-        <SecretDataCenter />
-      </PeelReveal>
+      <div id="datacenter">
+        <PeelReveal isRevealed={isSecretRevealed}>
+          <SecretDataCenter />
+        </PeelReveal>
+      </div>
     </main>
   );
 }
