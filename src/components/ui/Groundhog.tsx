@@ -47,10 +47,12 @@ export function Groundhog({ onDig, className }: GroundhogProps) {
 
   const handleClick = () => {
     if (onDig) {
-      // Trigger dig animation then callback
-      controls.start('dig').then(() => {
+      // Trigger dig animation and callback simultaneously
+      controls.start('dig');
+      // Small delay for visual effect, then trigger reveal
+      setTimeout(() => {
         onDig();
-      });
+      }, 300);
     }
   };
 
