@@ -1,0 +1,368 @@
+/**
+ * Zone Transition System
+ * Creates seamless blending between background zones
+ *
+ * Each zone has:
+ * - Base background image
+ * - Bottom gradient overlay (fades into next zone)
+ * - Top gradient overlay (receives fade from previous zone)
+ * - Optional atmospheric effects
+ */
+
+/* ============================================================
+   BASE ZONE STYLES
+   ============================================================ */
+
+.zone {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Gradient overlays for transitions */
+.zone::before,
+.zone::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top gradient - receives transition from above */
+.zone::before {
+  top: 0;
+  height: 20vh;
+}
+
+/* Bottom gradient - transitions to zone below */
+.zone::after {
+  bottom: 0;
+  height: 25vh;
+}
+
+/* ============================================================
+   SKY ZONE (Hero)
+   ============================================================ */
+
+.zone-sky {
+  background-image: url('/assets/sky/sky-background-v2.png');
+  background-position: center bottom;
+}
+
+/* No top gradient needed (first zone) */
+.zone-sky::before {
+  display: none;
+}
+
+/* Bottom: fade sky blues/greens into forest darks */
+.zone-sky::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(45, 80, 50, 0.3) 50%,
+    rgba(30, 50, 35, 0.7) 100%
+  );
+}
+
+/* ============================================================
+   FOREST ZONE
+   ============================================================ */
+
+.zone-forest {
+  background-image: url('/assets/forest/forest-background-v2.png');
+  background-position: center center;
+}
+
+/* Top: receive sky transition */
+.zone-forest::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 50, 35, 0.7) 0%,
+    rgba(30, 50, 35, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+/* Bottom: fade forest greens into rocky earth tones */
+.zone-forest::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(90, 70, 50, 0.3) 50%,
+    rgba(120, 90, 60, 0.6) 100%
+  );
+}
+
+/* ============================================================
+   ROCKY ZONE
+   ============================================================ */
+
+.zone-rocky {
+  background-image: url('/assets/rocky/rocky-climb-v2.png');
+  background-position: center center;
+}
+
+/* Top: receive forest transition */
+.zone-rocky::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 90, 60, 0.6) 0%,
+    rgba(90, 70, 50, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+/* Bottom: fade rocks into coastal greens/blues */
+.zone-rocky::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(60, 90, 80, 0.3) 50%,
+    rgba(50, 80, 90, 0.5) 100%
+  );
+}
+
+/* ============================================================
+   COASTAL ZONE
+   ============================================================ */
+
+.zone-coastal {
+  background-image: url('/assets/coastal/coastal-overlook-v2.png');
+  background-position: center center;
+}
+
+/* Top: receive rocky transition */
+.zone-coastal::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(50, 80, 90, 0.5) 0%,
+    rgba(60, 90, 80, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+/* Bottom: fade coastal into underground earth */
+.zone-coastal::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(80, 60, 40, 0.4) 50%,
+    rgba(60, 45, 30, 0.8) 100%
+  );
+}
+
+/* ============================================================
+   BURROWS ZONE (Underground Transition)
+   ============================================================ */
+
+.zone-burrows {
+  background-image: url('/assets/burrows/underground-transition-v2.png');
+  background-position: center center;
+}
+
+/* Top: receive coastal transition */
+.zone-burrows::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(60, 45, 30, 0.8) 0%,
+    rgba(80, 60, 40, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+/* Bottom: fade into datacenter cool tones */
+.zone-burrows::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(40, 50, 60, 0.5) 50%,
+    rgba(20, 30, 45, 0.85) 100%
+  );
+}
+
+/* ============================================================
+   DATACENTER ZONE
+   ============================================================ */
+
+.zone-datacenter {
+  background-image: url('/assets/datacenter/datacenter-background-v3.png');
+  background-position: center center;
+}
+
+/* Top: receive burrows transition */
+.zone-datacenter::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 30, 45, 0.85) 0%,
+    rgba(40, 50, 60, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+/* No bottom gradient (last zone) */
+.zone-datacenter::after {
+  display: none;
+}
+
+/* ============================================================
+   ATMOSPHERIC EFFECTS (optional overlays)
+   ============================================================ */
+
+/* Subtle fog/mist layer */
+.zone-atmosphere-fog {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: fog-drift 30s ease-in-out infinite;
+}
+
+@keyframes fog-drift {
+  0%, 100% { opacity: 0.3; transform: translateX(-2%); }
+  50% { opacity: 0.5; transform: translateX(2%); }
+}
+
+/* Light rays effect */
+.zone-atmosphere-rays {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 70% 20%,
+    rgba(255, 220, 150, 0.15) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Dust particles container */
+.zone-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* ============================================================
+   CONTENT AREAS (for text)
+   ============================================================ */
+
+.zone-content {
+  position: relative;
+  z-index: 10;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Text readability overlay */
+.zone-content-backdrop {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 100%
+  );
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+/* ============================================================
+   WILDLIFE SPRITES
+   ============================================================ */
+
+.wildlife-sprite {
+  position: absolute;
+  z-index: 5;
+  pointer-events: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.wildlife-sprite:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Tooltip for wildlife info */
+.wildlife-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.wildlife-sprite:hover .wildlife-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Size variations for wildlife */
+.wildlife-xs { width: 3%; max-width: 40px; }
+.wildlife-sm { width: 5%; max-width: 60px; }
+.wildlife-md { width: 8%; max-width: 100px; }
+.wildlife-lg { width: 12%; max-width: 150px; }
+
+/* Positioning helpers */
+.pos-top-left { top: 15%; left: 10%; }
+.pos-top-right { top: 15%; right: 10%; }
+.pos-mid-left { top: 45%; left: 5%; }
+.pos-mid-right { top: 45%; right: 5%; }
+.pos-bottom-left { bottom: 20%; left: 15%; }
+.pos-bottom-right { bottom: 20%; right: 15%; }
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .zone {
+    min-height: 80vh;
+  }
+
+  .zone::before,
+  .zone::after {
+    height: 15vh;
+  }
+
+  .zone-content {
+    padding: 2rem 1rem;
+  }
+
+  .wildlife-sprite {
+    display: none; /* Hide on mobile for cleaner experience */
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .zone-atmosphere-fog {
+    animation: none;
+    opacity: 0.4;
+  }
+}

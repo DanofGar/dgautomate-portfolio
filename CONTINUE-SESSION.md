@@ -8,88 +8,108 @@ You're continuing work on **dgautomate.dev**, a portfolio website with a Big Sur
 
 - **Project**: `~/Projects/dgautomate-portfolio/`
 - **Assets**: `~/Projects/dgautomate-portfolio/public/assets/`
-- **Worktree**: `~/.config/superpowers/worktrees/dgautomate-portfolio/design-research-components`
-- **Branch**: `feature/design-research-components`
-- **Notion Page**: `2fb8718c-af12-81dc-8385-dd37ebd22f93` (check for latest decisions)
+- **Branch**: `feat/cinematic-video-zones`
 
-## Style Direction (APPROVED)
+## Current Task: Zone Integration & Visual Polish
 
-- **Realistic-ish 3D** - Pixar environmental art quality
-- **Big Sur photography aesthetic** with subtle charm
-- **NOT kawaii** - no smiley faces on objects, minimal blush on characters
-- **Coastal image** is the "favorite vibe" - use as reference for tone
+Integrate wildlife sprites into existing zone backgrounds, add seamless zone transitions, and refresh text to be more casual/creative.
 
-## Current Asset Status (ALL APPROVED - Feb 4, 2026)
+## Asset Status (Feb 4, 2026)
 
-| Asset | Status | Location |
-|-------|--------|----------|
-| sky-background-v2.png | APPROVED | /assets/sky/ |
-| forest-background-v2.png | APPROVED | /assets/forest/ |
-| coastal-overlook-v2.png | APPROVED (favorite) | /assets/coastal/ |
-| rocky-climb-v2.png | APPROVED | /assets/rocky/ |
-| underground-transition-v2.png | APPROVED | /assets/burrows/ |
-| groundhog-scientist-v2.png | APPROVED | /assets/characters/ |
-| datacenter-background-v3.png | **APPROVED** | /assets/datacenter/ |
-| coffee-runner.png | **APPROVED** | /assets/characters/ |
-| security-guard.png | **APPROVED** | /assets/characters/ |
-| network-engineer.png | **APPROVED** | /assets/characters/ |
-| server-technician.png | **APPROVED** | /assets/characters/ |
-| data-analyst.png | **APPROVED** | /assets/characters/ |
-| senior-architect.png | **APPROVED** | /assets/characters/ |
-| intern.png | **APPROVED** | /assets/characters/ |
-| karaoke-singer.png | **APPROVED** | /assets/characters/ |
+### Backgrounds (APPROVED - photorealistic, keep as-is)
+| Zone | File | Status |
+|------|------|--------|
+| Sky | `sky/sky-background-v2.png` | ✓ APPROVED |
+| Forest | `forest/forest-background-v2.png` | ✓ APPROVED |
+| Rocky | `rocky/rocky-climb-v2.png` | ✓ APPROVED |
+| Coastal | `coastal/coastal-overlook-v2.png` | ✓ APPROVED (favorite) |
+| Burrows | `burrows/underground-transition-v2.png` | ✓ APPROVED |
+| Datacenter | `datacenter/datacenter-background-v3.png` | ✓ APPROVED |
 
-## Design Decisions Made (Feb 4, 2026)
+### Wildlife Sprites (NEW - realistic style, for overlay)
+| Zone | Creature | File |
+|------|----------|------|
+| Sky | Brown Pelican | `sky/wildlife/pelican-silhouette.png` |
+| Forest | Banana Slug | `forest/wildlife/banana-slug-small.png` |
+| Forest | Steller's Jay | `forest/wildlife/stellers-jay-realistic.png` |
+| Rocky | California Quail | `rocky/wildlife/california-quail-realistic.png` |
+| Rocky | Fence Lizard | `rocky/wildlife/fence-lizard-realistic.png` |
+| Coastal | Sea Otter | `coastal/wildlife/sea-otter-realistic.png` |
+| Coastal | Cormorant | `coastal/wildlife/cormorant-realistic.png` |
 
-### Data Center Layout
-- Two floors with mezzanine catwalk
-- Spacious, tall ceiling
-- Server racks on upper level, workstations on main floor
+### Groundhog Characters (for Datacenter)
+All 9 characters in `characters/` - see PROMPT.md for details
 
-### Animation Approach
-- **CSS transforms** (translateX + slight bob) - NOT sprites, NOT Lottie
-- **Two movers**: Coffee Runner, Security Guard
-- All other characters stationary (optional subtle breathing)
+## New Components Created
 
-### Character Roster (9 total)
-1. Coffee Runner (animated - 8-10s loop)
-2. Security Guard (animated - 12s loop, opposite direction)
-3. Scientist (existing asset)
-4. Network Engineer
-5. Server Technician
-6. Data Analyst
-7. Senior Architect
-8. Intern
-9. Karaoke Singer
+| Component | Purpose |
+|-----------|---------|
+| `src/components/effects/ZoneBackground.tsx` | Wraps zones with background images + gradient transitions |
+| `src/components/ui/WildlifeSprite.tsx` | Hoverable wildlife with info tooltips |
+| `src/styles/zone-transitions.css` | CSS for seamless zone blending |
 
-### Easter Eggs
-- **Lyrics Terminal**: Scrolling karaoke text next to Karaoke Singer
-- **Pickleball paddle**: Somewhere in scene
-- Karaoke Singer groundhog performing/singing
+## Zone Transition Strategy
 
-## Next Phase: Implementation
+Zones blend via gradient overlays at borders:
+```
+SKY (top) - no top gradient
+    ↓ bottom gradient fades to forest greens
+FOREST
+    ↓ gradient fades to rocky earth tones
+ROCKY
+    ↓ gradient fades to coastal blues
+COASTAL
+    ↓ gradient fades to underground browns
+BURROWS
+    ↓ gradient fades to datacenter cool tones
+DATACENTER (bottom) - no bottom gradient
+```
 
-**PROMPT.md is ready** - Run the Ralph loop to implement:
+## Key Guidelines
 
+### Style (from STYLING_GUIDE.md)
+- **Physics zones**: Coastal (slow) for emotional content, Technical (snappy) for interactions
+- **Colors**: Marine Layer palette - deep-ocean, sea-foam, wet-sand, granite, sunset
+- **Wildlife**: Small, subtle accents (3-8% viewport width), natural positions
+
+### Text Tone
+- Casual, conversational, personality-driven
+- Show don't tell (real numbers, specific examples)
+- NOT corporate resume speak
+
+### Libraries Available
+- Aceternity UI (Aurora, particles, text effects)
+- Magic UI (Bento grid, Dock, typing animation)
+- Shadcn (structural primitives)
+- Framer Motion (physics-based animations)
+
+## Next Steps
+
+Run the Ralph loop:
 ```bash
 cd ~/Projects/dgautomate-portfolio
 while :; do cat PROMPT.md | claude --dangerously-skip-permissions; done
 ```
 
-Or implement manually following `PROMPT.md` instructions.
+The loop will iterate through PROMPT.md tasks until `.loop_complete` is created.
 
 ## Key Files
 
-- `PROMPT.md` - Ralph loop implementation prompt
-- `docs/plans/2026-02-04-datacenter-characters-design.md` - Full design spec
-- `docs/plans/2026-02-02-brand-document.md` - Brand guidelines
+- `PROMPT.md` - Ralph loop task checklist
+- `STYLING_GUIDE.md` - Physics zones, component libraries, color palette
 - `PREFERENCES.md` - Coding style preferences
+- `docs/plans/2026-02-02-brand-document.md` - Brand guidelines
 
 ## API Access
 
-- **Imagen 4.0**: Use `GOOGLE_API_KEY` env variable
-- **Script**: `scripts/generate-image.sh "prompt" "output.png" [aspect_ratio]`
+- **Imagen 4 Ultra**: `imagen-4.0-ultra-generate-001` via `GOOGLE_API_KEY`
+- **Scripts**: `scripts/generate-realistic-wildlife.py`, `scripts/generate-zone-scenes.py`
 
-## Notion Page ID
+## Verification
 
-`2fb8718c-af12-81dc-8385-dd37ebd22f93` - Update with progress at major checkpoints.
+After changes:
+1. `npm run dev` - start dev server
+2. Scroll through page - check zone transitions
+3. Test wildlife tooltips on hover
+4. Check mobile viewport
+5. `npm run build` - ensure no errors
