@@ -9,6 +9,7 @@ import { UndergroundBurrows } from '@/components/zones/UndergroundBurrows';
 import { PeelReveal } from '@/components/effects/PeelReveal';
 import { SecretDataCenter } from '@/components/zones/SecretDataCenter';
 import { Navigation } from '@/components/ui/Navigation';
+import { MobileLandscapePrompt } from '@/components/ui/MobileLandscapePrompt';
 
 export default function Home() {
   const [isSecretRevealed, setIsSecretRevealed] = useState(false);
@@ -19,6 +20,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <MobileLandscapePrompt />
       <AltitudeMeter />
       <Navigation />
 
