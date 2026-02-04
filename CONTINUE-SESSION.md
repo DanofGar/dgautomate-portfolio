@@ -4,8 +4,9 @@
 
 **dgautomate.dev** is a portfolio that tells your story through scenic Big Sur backdrops using a **hybrid layout approach** with specific Aceternity UI and Magic UI components.
 
-**Branch:** `feat/cinematic-video-zones`
+**Branch:** `iteration/v2-cleanup-and-assets`
 **Project:** `~/Projects/dgautomate-portfolio/`
+**Last Updated:** Iteration V2 (Feb 4, 2026)
 
 ---
 
@@ -13,7 +14,7 @@
 
 ```
 ┌─────────────────────────────────────────┐
-│  HERO (Full-bleed Aurora Background)    │  ← Aceternity Aurora
+│  HERO (Sky background image)            │  ← hero-sky-v1.png
 │  Text Generate Effect for hook line     │
 │  Pelican with 3D Card parallax          │
 └─────────────────────────────────────────┘
@@ -52,7 +53,6 @@
 ### From Aceternity UI:
 | Component | Use |
 |-----------|-----|
-| Aurora Background | Hero sky effect (California sunset colors) |
 | Text Generate Effect | Hook line text reveal |
 | Sticky Scroll Reveal | Story section layout |
 | 3D Card Effect | Wildlife parallax depth |
@@ -69,7 +69,6 @@
 
 ### Installation:
 ```bash
-npx shadcn@latest add "https://ui.aceternity.com/r/aurora-background"
 npx shadcn@latest add "https://ui.aceternity.com/r/sticky-scroll-reveal"
 npx shadcn@latest add "https://ui.aceternity.com/r/3d-card"
 npx shadcn@latest add "https://ui.aceternity.com/r/background-beams"
@@ -87,7 +86,7 @@ npx shadcn@latest add "https://magicui.design/r/scratch-to-reveal"
 
 | Section | Border Beam Color | Particles | Atmosphere |
 |---------|-------------------|-----------|------------|
-| Hero | Gold `#FFD93D` | None | California sunset aurora |
+| Hero | N/A | None | Sky background image |
 | Forest | Amber `#F59E0B` | Pale yellow pollen | Dappled sunlight |
 | Rocky | Earth `#D97706` | None | Warm afternoon |
 | Coastal | Ocean `#0EA5E9` | White/blue mist | Sea spray |
@@ -100,7 +99,7 @@ npx shadcn@latest add "https://magicui.design/r/scratch-to-reveal"
 ### Backgrounds
 | Zone | File | Used In |
 |------|------|---------|
-| Sky | `sky/sky-background-v2.png` | Hero (behind Aurora) |
+| Sky | `sky/hero-sky-v1.png` | Hero section background |
 | Forest | `forest/forest-background-v2.png` | Sticky Scroll panel 1 |
 | Rocky | `rocky/rocky-climb-v2.png` | Sticky Scroll panel 2 |
 | Coastal | `coastal/coastal-overlook-v2.png` | Sticky Scroll panel 3 |
