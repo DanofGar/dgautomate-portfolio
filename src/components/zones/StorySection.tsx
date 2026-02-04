@@ -177,6 +177,14 @@ export function StorySection() {
             />
           ))}
         </div>
+
+        {/* Bottom gradient transition to datacenter */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent, rgba(26, 26, 26, 0.8))',
+          }}
+        />
       </div>
     </section>
   );
@@ -213,7 +221,7 @@ function WildlifeCard({ src, alt, position, delay = 0 }: WildlifeCardProps) {
               alt={alt}
               width={128}
               height={128}
-              className="object-contain drop-shadow-lg"
+              className="object-contain drop-shadow-lg mix-blend-multiply dark:mix-blend-screen"
             />
           </CardItem>
         </CardBody>

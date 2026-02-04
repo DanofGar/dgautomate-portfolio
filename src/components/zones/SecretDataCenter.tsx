@@ -224,6 +224,14 @@ export function SecretDataCenter() {
         'bg-[#1a1a1a]'
       )}
     >
+      {/* Top gradient transition from story section */}
+      <div
+        className="absolute top-0 left-0 right-0 h-32 z-50 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(26, 26, 26, 0.8), transparent)',
+        }}
+      />
+
       {/* Background Beams - base layer */}
       <BackgroundBeams className="absolute inset-0 z-0" />
 
