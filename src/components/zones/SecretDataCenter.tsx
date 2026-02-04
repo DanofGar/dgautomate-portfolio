@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ContactForm } from '@/components/ui/ContactForm';
 
@@ -9,6 +10,196 @@ interface EasterEggState {
   pickleball: boolean;
   terminal: boolean;
   singing: boolean;
+}
+
+// Character asset paths
+const CHARACTERS = {
+  scientist: '/assets/characters/groundhog-scientist-v2.png',
+  coffeeRunner: '/assets/characters/coffee-runner.png',
+  securityGuard: '/assets/characters/security-guard.png',
+  networkEngineer: '/assets/characters/network-engineer.png',
+  serverTechnician: '/assets/characters/server-technician.png',
+  dataAnalyst: '/assets/characters/data-analyst.png',
+  seniorArchitect: '/assets/characters/senior-architect.png',
+  intern: '/assets/characters/intern.png',
+  karaokeSinger: '/assets/characters/karaoke-singer.png',
+} as const;
+
+// Karaoke lyrics for the terminal easter egg
+const KARAOKE_LYRICS = [
+  { text: "I'm walking on sunshine", highlight: false },
+  { text: "Whoa-oh!", highlight: false },
+  { text: "I'm walking on sunshine", highlight: false },
+  { text: "Whoa-oh!", highlight: false },
+  { text: "I'm walking on sunshine", highlight: true },
+  { text: "Whoa-oh!", highlight: false },
+  { text: "And don't it feel good!", highlight: false },
+  { text: "Hey! Alright now!", highlight: false },
+  { text: "And don't it feel good!", highlight: false },
+];
+
+// Stationary character component with optional subtle breathing animation
+function StationaryCharacter({
+  src,
+  alt,
+  className,
+  style,
+  breathe = true,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+  breathe?: boolean;
+}) {
+  return (
+    <motion.div
+      className={cn('absolute pointer-events-none select-none', className)}
+      style={style}
+      animate={
+        breathe
+          ? {
+              scale: [1, 1.015, 1],
+            }
+          : undefined
+      }
+      transition={
+        breathe
+          ? {
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }
+          : undefined
+      }
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={120}
+        height={160}
+        className="w-auto h-auto max-h-[120px] md:max-h-[160px] object-contain"
+        priority={false}
+      />
+    </motion.div>
+  );
+}
+
+// Animated character component for movers (Coffee Runner, Security Guard)
+function AnimatedMover({
+  src,
+  alt,
+  direction = 'right',
+  duration = 10,
+  className,
+}: {
+  src: string;
+  alt: string;
+  direction?: 'left' | 'right';
+  duration?: number;
+  className?: string;
+}) {
+  const startX = direction === 'right' ? '-10%' : '90%';
+  const endX = direction === 'right' ? '90%' : '-10%';
+
+  return (
+    <motion.div
+      className={cn(
+        'absolute bottom-[15%] pointer-events-none select-none hidden md:block',
+        className
+      )}
+      initial={{ x: startX }}
+      animate={{
+        x: [startX, endX, startX],
+        y: [0, -3, 0, -3, 0],
+      }}
+      transition={{
+        x: {
+          duration: duration,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        },
+        y: {
+          duration: 0.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        },
+      }}
+      style={{ zIndex: 30 }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={100}
+        height={140}
+        className="w-auto h-auto max-h-[100px] md:max-h-[140px] object-contain"
+        style={{
+          transform: direction === 'left' ? 'scaleX(-1)' : 'none',
+        }}
+      />
+    </motion.div>
+  );
+}
+
+// Lyrics terminal component with scrolling animation
+function LyricsTerminal({ isActive }: { isActive: boolean }) {
+  return (
+    <div
+      className={cn(
+        'absolute bg-background/90 border-2 border-datacenter-terminal/60 rounded-lg overflow-hidden',
+        'w-[140px] h-[100px] md:w-[180px] md:h-[120px]',
+        'font-mono text-[10px] md:text-xs'
+      )}
+      style={{
+        right: '18%',
+        bottom: '32%',
+        zIndex: 25,
+      }}
+    >
+      {/* Terminal header */}
+      <div className="bg-datacenter-terminal/20 px-2 py-1 border-b border-datacenter-terminal/30 flex items-center gap-1">
+        <div className="w-2 h-2 rounded-full bg-red-500/70" />
+        <div className="w-2 h-2 rounded-full bg-yellow-500/70" />
+        <div className="w-2 h-2 rounded-full bg-green-500/70" />
+        <span className="ml-2 text-datacenter-terminal/70 text-[8px]">
+          karaoke.exe
+        </span>
+      </div>
+
+      {/* Scrolling lyrics */}
+      <div className="relative h-[calc(100%-24px)] overflow-hidden">
+        <motion.div
+          className="absolute w-full"
+          animate={
+            isActive
+              ? {
+                  y: ['0%', '-50%'],
+                }
+              : undefined
+          }
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        >
+          {[...KARAOKE_LYRICS, ...KARAOKE_LYRICS].map((line, i) => (
+            <div
+              key={i}
+              className={cn(
+                'px-2 py-0.5 transition-colors',
+                line.highlight
+                  ? 'text-datacenter-terminal font-bold bg-datacenter-terminal/20'
+                  : 'text-foreground/50'
+              )}
+            >
+              ♪ {line.text}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
 }
 
 export function SecretDataCenter() {
@@ -25,111 +216,116 @@ export function SecretDataCenter() {
   return (
     <section
       className={cn(
-        'relative min-h-screen w-full',
-        'bg-gradient-to-b from-datacenter-blue/30 via-datacenter-metal to-datacenter-blue/20',
-        'py-24 px-4',
+        'relative w-full',
+        'min-h-[100vh] md:min-h-[120vh]',
         'overflow-hidden'
       )}
     >
-      {/* Atmospheric lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Warm overhead lamps */}
-        {[
-          { x: 20, y: 10 },
-          { x: 50, y: 10 },
-          { x: 80, y: 10 },
-        ].map((lamp, i) => (
-          <motion.div
-            key={`lamp-${i}`}
-            className="absolute rounded-full"
-            style={{
-              left: `${lamp.x}%`,
-              top: `${lamp.y}%`,
-              width: '150px',
-              height: '150px',
-              background: `radial-gradient(circle, ${`hsl(45, 70%, 65%)`} 0%, transparent 70%)`,
-              opacity: 0.4,
-            }}
-            animate={{
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 3 + i,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
-
-        {/* Terminal glow from screens */}
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={`screen-glow-${i}`}
-            className="absolute rounded-lg"
-            style={{
-              left: `${10 + i * 25}%`,
-              top: `${40 + Math.random() * 20}%`,
-              width: '120px',
-              height: '100px',
-              background: `radial-gradient(circle, ${`hsl(140, 60%, 50%)`} 0%, transparent 60%)`,
-              opacity: 0.2,
-            }}
-            animate={{
-              opacity: [0.15, 0.25, 0.15],
-            }}
-            transition={{
-              duration: 2 + i * 0.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.3,
-            }}
-          />
-        ))}
+      {/* Background image layer */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/datacenter/datacenter-background-v3.png"
+          alt="Secret underground data center"
+          fill
+          className="object-cover object-center"
+          priority
+          quality={90}
+        />
+        {/* Overlay gradient for depth and text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background/60" />
       </div>
 
-      {/* Server racks and equipment */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Left side server racks */}
-        <div className="absolute left-8 top-1/4 w-16 h-96 bg-datacenter-metal/40 border border-datacenter-blue/30 rounded-soft">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={`led-left-${i}`}
-              className="absolute left-2 w-2 h-2 rounded-full bg-datacenter-terminal"
-              style={{ top: `${10 + i * 11}%` }}
-              animate={{
-                opacity: [0.3, 1, 0.3],
-              }}
-              transition={{
-                duration: 1 + Math.random(),
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
+      {/* Character layers - Stationary characters at workstations */}
+      <div className="absolute inset-0" style={{ zIndex: 10 }}>
+        {/* Scientist - Central workstation */}
+        <StationaryCharacter
+          src={CHARACTERS.scientist}
+          alt="Groundhog scientist at central workstation"
+          style={{ left: '45%', bottom: '35%' }}
+        />
 
-        {/* Right side server racks */}
-        <div className="absolute right-8 top-1/3 w-16 h-80 bg-datacenter-metal/40 border border-datacenter-blue/30 rounded-soft">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={`led-right-${i}`}
-              className="absolute right-2 w-2 h-2 rounded-full bg-datacenter-terminal"
-              style={{ top: `${10 + i * 14}%` }}
-              animate={{
-                opacity: [0.3, 1, 0.3],
-              }}
-              transition={{
-                duration: 1.2 + Math.random(),
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
+        {/* Network Engineer - Server rack area (left side) */}
+        <StationaryCharacter
+          src={CHARACTERS.networkEngineer}
+          alt="Network engineer groundhog at server rack"
+          style={{ left: '12%', bottom: '38%' }}
+        />
+
+        {/* Server Technician - Crouched at panel */}
+        <StationaryCharacter
+          src={CHARACTERS.serverTechnician}
+          alt="Server technician groundhog at panel"
+          style={{ left: '22%', bottom: '28%' }}
+        />
+
+        {/* Data Analyst - At monitors */}
+        <StationaryCharacter
+          src={CHARACTERS.dataAnalyst}
+          alt="Data analyst groundhog studying charts"
+          style={{ left: '55%', bottom: '40%' }}
+        />
+
+        {/* Senior Architect - Drafting desk (right area) */}
+        <StationaryCharacter
+          src={CHARACTERS.seniorArchitect}
+          alt="Senior architect groundhog at drafting desk"
+          style={{ right: '25%', bottom: '35%' }}
+        />
+
+        {/* Intern - Supply area with boxes */}
+        <StationaryCharacter
+          src={CHARACTERS.intern}
+          alt="Intern groundhog carrying boxes"
+          style={{ right: '8%', bottom: '25%' }}
+          breathe={false}
+        />
+
+        {/* Karaoke Singer - Next to lyrics terminal */}
+        <motion.div
+          className="absolute pointer-events-none select-none"
+          style={{ right: '12%', bottom: '32%', zIndex: 20 }}
+          animate={{
+            rotate: [-3, 3, -3],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        >
+          <Image
+            src={CHARACTERS.karaokeSinger}
+            alt="Karaoke singer groundhog performing"
+            width={120}
+            height={160}
+            className="w-auto h-auto max-h-[120px] md:max-h-[160px] object-contain"
+          />
+        </motion.div>
+
+        {/* Lyrics Terminal Easter Egg - next to Karaoke Singer */}
+        <LyricsTerminal isActive={true} />
       </div>
 
-      {/* Content container */}
-      <div className="relative z-10 max-w-5xl mx-auto">
+      {/* Animated movers - highest z-index for foreground movement */}
+      {/* Coffee Runner - slides left to right, 8-10s loop */}
+      <AnimatedMover
+        src={CHARACTERS.coffeeRunner}
+        alt="Coffee runner groundhog with tray"
+        direction="right"
+        duration={9}
+      />
+
+      {/* Security Guard - patrols opposite direction, slower 12s loop */}
+      <AnimatedMover
+        src={CHARACTERS.securityGuard}
+        alt="Security guard groundhog on patrol"
+        direction="left"
+        duration={12}
+        className="bottom-[20%]"
+      />
+
+      {/* Content overlay - Header and contact form */}
+      <div className="relative z-40 flex flex-col min-h-[100vh] md:min-h-[120vh]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -139,217 +335,86 @@ export function SecretDataCenter() {
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="text-center mb-12"
+          className="text-center pt-12 md:pt-16 px-4"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground/90 mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground/90 mb-3 drop-shadow-lg">
             Welcome to the Underground
           </h2>
-          <p className="text-xl text-datacenter-terminal font-medium mb-2">
+          <p className="text-lg md:text-xl text-datacenter-terminal font-medium mb-2 drop-shadow-md">
             Secret Data Center
           </p>
-          <p className="text-sm text-foreground/50 font-mono">-100 ft</p>
+          <p className="text-sm text-foreground/60 font-mono">-100 ft</p>
         </motion.div>
 
-        {/* Main scene with groundhogs */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          {/* Left side - Groundhogs at work */}
+        {/* Spacer to push content down */}
+        <div className="flex-1" />
+
+        {/* Easter eggs row - Desktop only */}
+        <div className="hidden md:flex justify-center gap-8 mb-8 px-4">
+          {/* Pickleball paddle Easter egg */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            className="relative cursor-pointer bg-background/60 backdrop-blur-sm rounded-soft p-3 border border-datacenter-terminal/30"
+            whileHover={{
+              scale: 1.1,
+              rotate: [0, -5, 5, 0],
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleEasterEgg('pickleball')}
           >
-            {/* Groundhog 1 - At computer */}
-            <div className="relative bg-datacenter-metal/20 border border-datacenter-blue/30 rounded-soft p-6">
-              <div className="flex items-start gap-4">
-                <div className="text-6xl">🦫</div>
-                <div className="flex-1">
-                  <p className="text-sm text-foreground/70 mb-2">Senior Engineer</p>
-                  <div className="bg-background/50 rounded p-3 font-mono text-xs text-datacenter-terminal">
-                    <motion.span
-                      animate={{ opacity: [1, 0.5, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      $ analyzing dam blueprints...
-                    </motion.span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Groundhog 2 - Planning */}
-            <div className="relative bg-datacenter-metal/20 border border-datacenter-blue/30 rounded-soft p-6">
-              <div className="flex items-start gap-4">
-                <div className="text-6xl">🦫</div>
-                <div className="flex-1">
-                  <p className="text-sm text-foreground/70 mb-2">Project Manager</p>
-                  <p className="text-sm text-foreground/60">
-                    Coordinating the biggest construction project this side of the burrow
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Easter egg - Pickleball paddle */}
-            <motion.div
-              className="relative cursor-pointer"
-              whileHover={{
-                scale: 1.05,
-                rotate: [0, -5, 5, 0],
-                transition: {
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 15,
-                  rotate: {
-                    duration: 0.5,
-                  },
-                },
-              }}
-              whileTap={{
-                scale: 0.95,
-                transition: {
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 20,
-                },
-              }}
-              onClick={() => handleEasterEgg('pickleball')}
-            >
-              <div className="text-4xl">🏓</div>
-              {easterEggs.pickleball && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 20,
-                  }}
-                  className="absolute left-16 top-0 bg-background/90 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered"
-                >
-                  Pickleball is one of my favorite hobbies!
-                </motion.div>
-              )}
-            </motion.div>
+            <div className="text-4xl">🏓</div>
+            {easterEggs.pickleball && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute -top-12 left-1/2 -translate-x-1/2 bg-background/95 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered z-50"
+              >
+                Pickleball is one of my favorite hobbies!
+              </motion.div>
+            )}
           </motion.div>
 
-          {/* Right side - Terminals and Easter eggs */}
+          {/* Hiking boots Easter egg */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
+            className="relative cursor-pointer bg-background/60 backdrop-blur-sm rounded-soft p-3 border border-datacenter-terminal/30"
+            whileHover={{
+              scale: 1.1,
+              rotate: [0, 5, -5, 0],
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleEasterEgg('singing')}
           >
-            {/* Terminal with lyrics Easter egg */}
-            <motion.div
-              className="relative bg-background/60 border border-datacenter-terminal/40 rounded-soft p-4 cursor-pointer"
-              whileHover={{
-                scale: 1.02,
-                y: -2,
-                transition: {
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 20,
-                },
-              }}
-              whileTap={{
-                scale: 0.98,
-                transition: {
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 15,
-                },
-              }}
-              onClick={() => handleEasterEgg('terminal')}
-            >
-              <div className="font-mono text-xs text-datacenter-terminal space-y-1">
-                <div className="text-foreground/50">
-                  terminal-01@datacenter:~$
-                </div>
-                {easterEggs.terminal ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-datacenter-terminal/80 space-y-1"
-                  >
-                    <div>♪ &quot;I&apos;m walkin&apos; on sunshine, whoa-oh&quot; ♪</div>
-                    <div>♪ &quot;And don&apos;t it feel good!&quot; ♪</div>
-                    <div className="text-foreground/50 mt-2">
-                      (Singing is another hobby of mine)
-                    </div>
-                  </motion.div>
-                ) : (
-                  <div className="text-datacenter-terminal/60">
-                    Click to see what&apos;s playing...
-                  </div>
-                )}
-              </div>
-            </motion.div>
+            <div className="text-4xl">🥾</div>
+            {easterEggs.singing && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute -top-12 left-1/2 -translate-x-1/2 bg-background/95 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered z-50"
+              >
+                Garrapata Trail in Big Sur is my favorite!
+              </motion.div>
+            )}
+          </motion.div>
 
-            {/* Dam construction plans */}
-            <div className="bg-datacenter-metal/20 border border-datacenter-blue/30 rounded-soft p-6">
-              <h3 className="text-lg font-semibold text-foreground/80 mb-3">
-                Current Project: Dam Construction
-              </h3>
-              <div className="space-y-2 text-sm text-foreground/60">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-datacenter-terminal" />
-                  <span>Foundation: 85% complete</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-datacenter-terminal/50" />
-                  <span>Water flow modeling: In progress</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-datacenter-blue/50" />
-                  <span>Structural reinforcement: Planned</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Hiking reference */}
-            <motion.div
-              className="relative cursor-pointer"
-              whileHover={{
-                scale: 1.05,
-                rotate: [0, 5, -5, 0],
-                transition: {
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 15,
-                  rotate: {
-                    duration: 0.5,
-                  },
-                },
-              }}
-              whileTap={{
-                scale: 0.95,
-                transition: {
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 20,
-                },
-              }}
-              onClick={() => handleEasterEgg('singing')}
-            >
-              <div className="text-4xl">🥾</div>
-              {easterEggs.singing && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 20,
-                  }}
-                  className="absolute left-16 top-0 bg-background/90 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered"
-                >
-                  Garrapata Trail in Big Sur is my favorite!
-                </motion.div>
-              )}
-            </motion.div>
+          {/* Microphone Easter egg */}
+          <motion.div
+            className="relative cursor-pointer bg-background/60 backdrop-blur-sm rounded-soft p-3 border border-datacenter-terminal/30"
+            whileHover={{
+              scale: 1.1,
+              y: -3,
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleEasterEgg('terminal')}
+          >
+            <div className="text-4xl">🎤</div>
+            {easterEggs.terminal && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute -top-12 left-1/2 -translate-x-1/2 bg-background/95 border border-datacenter-terminal/50 rounded-soft px-4 py-2 text-sm text-foreground/80 whitespace-nowrap shadow-layered z-50"
+              >
+                Singing is another hobby of mine! 🎵
+              </motion.div>
+            )}
           </motion.div>
         </div>
 
@@ -358,18 +423,21 @@ export function SecretDataCenter() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="max-w-2xl mx-auto bg-datacenter-metal/20 border border-datacenter-blue/30 rounded-softer p-8 md:p-12"
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="max-w-2xl mx-auto mb-12 md:mb-16 px-4"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-foreground/90 mb-3">
-              You found the secret path
-            </h3>
-            <p className="text-foreground/70">
-              Leave your info and I&apos;ll reach out if there&apos;s a connection to be made.
-            </p>
+          <div className="bg-background/80 backdrop-blur-md border border-datacenter-blue/40 rounded-softer p-6 md:p-10 shadow-layered">
+            <div className="text-center mb-6">
+              <h3 className="text-xl md:text-2xl font-bold text-foreground/90 mb-2">
+                You found the secret path
+              </h3>
+              <p className="text-foreground/70 text-sm md:text-base">
+                Leave your info and I&apos;ll reach out if there&apos;s a
+                connection to be made.
+              </p>
+            </div>
+            <ContactForm />
           </div>
-          <ContactForm />
         </motion.div>
       </div>
     </section>
