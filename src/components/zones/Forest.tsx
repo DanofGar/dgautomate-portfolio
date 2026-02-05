@@ -1,105 +1,52 @@
+// src/components/zones/Forest.tsx
 'use client';
 
 import { motion } from 'framer-motion';
-import { SkillCard } from '@/components/ui/SkillCard';
-import { Parallax } from '@/components/effects/Parallax';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 export function Forest() {
-  const operationsSkills = [
-    'Payment processing & reconciliation',
-    'Client relationship management',
-    'Logistics & inventory flow',
-    'Cross-functional team coordination',
-  ];
-
   return (
-    <section
-      className={cn(
-        'relative min-h-screen w-full',
-        'flex flex-col items-center justify-center',
-        'bg-gradient-to-b from-sky-cream via-ground-sage to-ground-tan',
-        'py-24 px-4',
-        'overflow-hidden'
-      )}
-    >
-      {/* Tree silhouettes in background with parallax */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        {/* Tall trees - using vertical gradients with varying parallax speeds */}
-        {[...Array(8)].map((_, i) => {
-          // Alternate between background (slow) and foreground (fast) trees
-          const parallaxSpeed = i % 2 === 0 ? 0.4 : 0.7;
-          return (
-            <Parallax key={i} speed={parallaxSpeed}>
-              <motion.div
-                className={cn(
-                  'absolute bottom-0',
-                  'bg-gradient-to-t from-underground-brown via-underground-amber to-transparent',
-                  'rounded-t-full'
-                )}
-                style={{
-                  left: `${10 + i * 12}%`,
-                  width: `${40 + Math.random() * 30}px`,
-                  height: `${60 + Math.random() * 40}%`,
-                }}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 0.2, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 1,
-                  delay: i * 0.1,
-                }}
-              />
-            </Parallax>
-          );
-        })}
+    <section className="zone relative min-h-screen w-full overflow-hidden scroll-snap-align-start">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/assets/forest/forest-background-v3.png"
+          alt="Redwood forest canopy"
+          fill
+          className="object-cover"
+          quality={90}
+        />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      {/* Vignette scrim for text area */}
+      <div className="absolute inset-0 z-5 scrim-vignette" />
+
+      {/* Content - Left side (darker canopy area) */}
+      <div className="relative z-10 min-h-screen flex items-center px-8 md:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mb-12"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-20%' }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-lg"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-background mb-4">
-            The Forest
+          <h2
+            className={cn(
+              'font-serif text-3xl md:text-5xl font-bold mb-6',
+              'text-warm-white text-shadow-readable'
+            )}
+          >
+            People First
           </h2>
-          <p className="text-xl text-background/80 font-medium">
-            Operations · Building systems that scale
-          </p>
-        </motion.div>
-
-        {/* Skill card */}
-        <div className="max-w-2xl mx-auto">
-          <SkillCard title="Operations Expertise" items={operationsSkills} delay={0.3} />
-        </div>
-
-        {/* Proof point */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.6,
-            delay: 0.8,
-          }}
-          className={cn(
-            'mt-8 p-4 rounded-soft',
-            'bg-background/40 backdrop-blur-sm',
-            'border border-foreground/5',
-            'max-w-2xl mx-auto'
-          )}
-        >
-          <p className="text-background/70 text-sm">
-            <span className="font-semibold text-background">FloraFlex:</span> Managed payment
-            processing for 4,000+ active accounts, coordinating logistics and client relationships
-            across wholesale operations
+          <p
+            className={cn(
+              'font-body text-lg md:text-xl leading-relaxed',
+              'text-warm-white text-shadow-readable'
+            )}
+          >
+            I started in sales, which means I spent years learning to actually listen.
+            Turns out that skill transfers pretty well to understanding what systems need to do.
           </p>
         </motion.div>
       </div>
