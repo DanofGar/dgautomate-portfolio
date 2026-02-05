@@ -1,116 +1,76 @@
+// src/components/zones/Sky.tsx
 'use client';
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
-import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
 import { cn } from '@/lib/utils';
 
 export function Sky() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
+    <section className="zone relative min-h-screen w-full overflow-hidden scroll-snap-align-start">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/sky/hero-sky-v1.png"
+          src="/assets/sky/sky-background-v3.png"
           alt="California sky at golden hour"
           fill
-          className="object-cover"
+          className="object-cover object-bottom"
           priority
           quality={90}
         />
-        {/* Subtle overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-4">
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.2,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+      {/* Name - Top Right per spec */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute top-8 right-8 md:top-12 md:right-12 z-10"
+      >
+        <h1
           className={cn(
-            'text-6xl md:text-8xl font-bold',
-            'text-white drop-shadow-lg',
-            'mb-6'
+            'font-serif text-4xl md:text-6xl lg:text-7xl font-bold',
+            'text-warm-white text-shadow-readable',
+            'text-right'
           )}
         >
-          Daniel G
-        </motion.h1>
+          Daniel Garcia
+        </h1>
+      </motion.div>
 
-        {/* Hook line with Text Generate Effect */}
-        <div className="max-w-2xl">
-          <TextGenerateEffect
-            words="I build systems that work while I sleep."
-            className="text-xl md:text-2xl text-white/90 drop-shadow-md"
-            duration={0.6}
-          />
-        </div>
-
-        {/* Pelican with 3D Card Effect */}
-        <CardContainer
-          className="absolute top-8 right-8 md:top-16 md:right-16"
-          containerClassName="py-0"
+      {/* Hook line - Center bottom area */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-32 left-0 right-0 z-10 px-8"
+      >
+        <p
+          className={cn(
+            'font-body text-xl md:text-2xl',
+            'text-warm-white text-shadow-readable',
+            'text-center max-w-2xl mx-auto'
+          )}
         >
-          <CardBody className="bg-transparent w-20 h-20 md:w-24 md:h-24">
-            <CardItem translateZ={50} className="w-full h-full">
-              <Image
-                src="/assets/sky/wildlife/pelican-silhouette.png"
-                alt="Pelican silhouette"
-                width={96}
-                height={96}
-                className="object-contain opacity-80 drop-shadow-lg"
-              />
-            </CardItem>
-          </CardBody>
-        </CardContainer>
+          I build systems that work while I sleep.
+        </p>
+      </motion.div>
 
-        {/* Scroll indicator */}
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+      >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 1,
-            delay: 2.5,
-          }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-6 h-10 rounded-full border-2 border-white/40 flex items-start justify-center p-2"
         >
-          <motion.div
-            animate={{
-              y: [0, 12, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className={cn(
-              'w-8 h-12 rounded-full',
-              'border-2 border-white/40',
-              'flex items-start justify-center',
-              'p-2',
-              'cursor-pointer'
-            )}
-          >
-            <motion.div
-              className="w-2 h-2 rounded-full bg-white/60"
-              animate={{
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-          </motion.div>
+          <div className="w-1.5 h-1.5 rounded-full bg-white/60" />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
