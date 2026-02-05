@@ -55,7 +55,7 @@ export function Sky() {
               'text-center'
             )}
           >
-            I build systems that work while I sleep.
+            I used to close deals. Now I build the tools that help others do the same.
           </p>
         </div>
       </motion.div>
