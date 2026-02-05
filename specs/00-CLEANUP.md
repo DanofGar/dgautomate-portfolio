@@ -159,7 +159,10 @@ After completing a task, git commit immediately.
 - **Commit:** `docs(cleanup): annotate STYLING_GUIDE.md with v3 notice`
 
 ### 9. Verify veo-prompts status
-- **Status:** NOT_STARTED
+- **Status:** COMPLETE
+- **Decision:** KEEP in place (video-layer-strategy.md, zone-prompts.md)
+  These document the video approach for future asset work.
+  The datacenter-loop.mp4 is kept per PERFORMANCE_BUDGET.md.
 - **Action:**
   - Check `docs/veo-prompts/` — determine if these are for the datacenter
     video loop or other video assets
