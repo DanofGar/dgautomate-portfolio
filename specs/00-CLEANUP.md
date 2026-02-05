@@ -75,7 +75,7 @@ After completing a task, git commit immediately.
 - **Commit:** `chore(cleanup): archive unused character and wildlife assets`
 
 ### 4. Archive legacy docs
-- **Status:** NOT_STARTED
+- **Status:** COMPLETE
 - **Action:** 
   - Create `docs/archive/v1/` and `docs/archive/v2/`
   - Move `docs/iteration-v1-notes/` contents → `docs/archive/v1/`
