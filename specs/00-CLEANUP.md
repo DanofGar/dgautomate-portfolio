@@ -49,7 +49,7 @@ After completing a task, git commit immediately.
 - **Commit:** `docs(cleanup): component audit results`
 
 ### 3. Audit existing assets
-- **Status:** IN_PROGRESS (audit complete, archiving next)
+- **Status:** COMPLETE
 - **Action:** Check every file in `public/assets/`. For each, note:
   - Dimensions and file size
   - Whether it has transparency (characters/wildlife) or not (backgrounds)

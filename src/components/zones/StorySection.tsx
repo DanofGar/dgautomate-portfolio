@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BorderBeam } from '@/components/ui/border-beam';
 import { Particles } from '@/components/ui/particles';
-import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
 
+// Wildlife archived per DESIGN_DECISIONS.md - landscapes only
 const storyContent = [
   {
     title: 'People First',
@@ -16,10 +16,6 @@ const storyContent = [
     background: '/assets/forest/forest-background-v2.png',
     beamColor: { from: '#F59E0B', to: '#D97706' }, // Amber
     particles: { color: '#FEF3C7', quantity: 30 }, // Pale yellow pollen
-    wildlife: [
-      { src: '/assets/forest/wildlife/banana-slug-small.png', alt: 'Banana Slug', position: 'bottom-left' },
-      { src: '/assets/forest/wildlife/stellers-jay-realistic.png', alt: "Steller's Jay", position: 'top-right' },
-    ],
   },
   {
     title: 'Breaking Things (On Purpose)',
@@ -28,10 +24,6 @@ const storyContent = [
     background: '/assets/rocky/rocky-climb-v2.png',
     beamColor: { from: '#D97706', to: '#B45309' }, // Earth tones
     particles: null, // No particles for rocky
-    wildlife: [
-      { src: '/assets/rocky/wildlife/california-quail-realistic.png', alt: 'California Quail', position: 'bottom-right' },
-      { src: '/assets/rocky/wildlife/fence-lizard-realistic.png', alt: 'Fence Lizard', position: 'center-right' },
-    ],
   },
   {
     title: 'The Automation Obsession',
@@ -40,9 +32,6 @@ const storyContent = [
     background: '/assets/coastal/coastal-overlook-v2.png',
     beamColor: { from: '#0EA5E9', to: '#0284C7' }, // Ocean blue
     particles: { color: '#E0F2FE', quantity: 40, vy: -0.3 }, // White/blue mist rising
-    wildlife: [
-      { src: '/assets/coastal/wildlife/sea-otter-realistic.png', alt: 'Sea Otter', position: 'bottom-left' },
-    ],
   },
 ];
 
@@ -144,18 +133,8 @@ export function StorySection() {
                 </div>
               </motion.div>
 
-              {/* Right side - Wildlife with 3D effect */}
-              <div className="hidden lg:flex justify-center items-center relative h-96">
-                {currentContent.wildlife.map((animal, idx) => (
-                  <WildlifeCard
-                    key={animal.alt}
-                    src={animal.src}
-                    alt={animal.alt}
-                    position={animal.position}
-                    delay={idx * 0.2}
-                  />
-                ))}
-              </div>
+              {/* Right side - Reserved for future visual elements */}
+              <div className="hidden lg:block" />
             </div>
           </div>
         </div>
@@ -190,42 +169,3 @@ export function StorySection() {
   );
 }
 
-interface WildlifeCardProps {
-  src: string;
-  alt: string;
-  position: string;
-  delay?: number;
-}
-
-function WildlifeCard({ src, alt, position, delay = 0 }: WildlifeCardProps) {
-  const positionClasses: Record<string, string> = {
-    'bottom-left': 'absolute bottom-4 left-4',
-    'bottom-right': 'absolute bottom-4 right-4',
-    'top-right': 'absolute top-4 right-4',
-    'top-left': 'absolute top-4 left-4',
-    'center-right': 'absolute top-1/2 -translate-y-1/2 right-8',
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={positionClasses[position] || 'absolute'}
-    >
-      <CardContainer containerClassName="py-0">
-        <CardBody className="bg-transparent w-24 h-24 md:w-32 md:h-32">
-          <CardItem translateZ={40}>
-            <Image
-              src={src}
-              alt={alt}
-              width={128}
-              height={128}
-              className="object-contain drop-shadow-lg mix-blend-multiply dark:mix-blend-screen"
-            />
-          </CardItem>
-        </CardBody>
-      </CardContainer>
-    </motion.div>
-  );
-}
