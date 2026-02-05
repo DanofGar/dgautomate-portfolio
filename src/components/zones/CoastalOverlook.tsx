@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 export function CoastalOverlook() {
   return (
-    <section className="zone relative min-h-screen w-full overflow-hidden scroll-snap-align-start">
+    <section className="zone relative h-screen w-full overflow-hidden scroll-snap-align-start">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -23,7 +23,7 @@ export function CoastalOverlook() {
       <div className="absolute inset-0 z-5 scrim-vignette" />
 
       {/* Content - Left side */}
-      <div className="relative z-10 min-h-screen flex items-center px-8 md:px-16">
+      <div className="relative z-10 h-full flex items-center px-8 md:px-16">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}

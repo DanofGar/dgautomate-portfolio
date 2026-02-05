@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 export function Cave() {
   return (
-    <section className="zone relative min-h-screen w-full overflow-hidden scroll-snap-align-start">
+    <section className="zone relative h-screen w-full overflow-hidden scroll-snap-align-start">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -28,7 +28,7 @@ export function Cave() {
       />
 
       {/* Content - centered, mysterious */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-8">
+      <div className="relative z-10 h-full flex items-center justify-center px-8">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

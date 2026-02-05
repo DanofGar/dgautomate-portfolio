@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 
 export function Sky() {
   return (
-    <section className="zone relative min-h-screen w-full overflow-hidden scroll-snap-align-start">
+    <section className="zone relative h-screen w-full overflow-hidden scroll-snap-align-start">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
