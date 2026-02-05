@@ -39,7 +39,7 @@ After completing a task, git commit immediately.
 - **Commit:** `chore(cleanup): create consolidation branch`
 
 ### 2. Audit existing components
-- **Status:** NOT_STARTED  
+- **Status:** COMPLETE  
 - **Action:** Read through `src/components/` and `src/app/`. Produce a brief
   inventory in this file (below, in the Audit Results section) listing:
   - Which components are actively used vs dead code
@@ -209,16 +209,191 @@ Git status: clean (on main branch after committing specs)
 - `typewriter-effect.tsx`: useEffect missing `animate` dependency
 
 ### Component Inventory
-*(Agent fills this in during Task 2)*
+*(Completed 2026-02-05)*
+
+**ACTIVE COMPONENTS (used in production):**
 
 ```
-Component: [name]
-  Location: src/components/[path]
-  Zone: [sky|forest|rocky|coastal|datacenter|shared]
-  Used: [yes|no]
-  Animation: [description of current animation approach]
-  Notes: [any issues or observations]
+Component: page.tsx
+  Location: src/app/page.tsx
+  Zone: shared (main entry)
+  Used: YES
+  Animation: None (orchestrates zones)
+  Notes: Clean entry point - Sky → StorySection → SecretDataCenter
+
+Component: Sky.tsx
+  Location: src/components/zones/Sky.tsx
+  Zone: sky (hero)
+  Used: YES
+  Animation: TextGenerateEffect for hook line, 3D Card for pelican
+  Notes: Uses 3d-card and text-generate-effect
+
+Component: StorySection.tsx
+  Location: src/components/zones/StorySection.tsx
+  Zone: forest/rocky/coastal (sticky scroll)
+  Used: YES
+  Animation: Framer Motion scroll-based crossfade, border-beam glow, particles
+  Notes: Custom sticky scroll impl (NOT using Aceternity sticky-scroll-reveal)
+
+Component: SecretDataCenter.tsx
+  Location: src/components/zones/SecretDataCenter.tsx
+  Zone: datacenter
+  Used: YES
+  Animation: BackgroundBeams, Particles, character breathing/walking animations
+  Notes: Uses all 9 character assets, has easter egg interactions
+
+Component: AltitudeMeter.tsx
+  Location: src/components/ui/AltitudeMeter.tsx
+  Zone: shared
+  Used: YES
+  Animation: Scroll-based position/label updates
+  Notes: May need sync fix per DESIGN_DECISIONS
+
+Component: Navigation.tsx
+  Location: src/components/ui/Navigation.tsx
+  Zone: shared
+  Used: YES
+  Animation: FloatingDock (Aceternity)
+  Notes: Fixed bottom navigation
+
+Component: MobileLandscapePrompt.tsx
+  Location: src/components/ui/MobileLandscapePrompt.tsx
+  Zone: shared
+  Used: YES
+  Animation: Fade in/out
+  Notes: Portrait mode prompt for mobile
+
+Component: ContactForm.tsx
+  Location: src/components/ui/ContactForm.tsx
+  Zone: datacenter
+  Used: YES
+  Animation: TypewriterEffectSmooth for labels
+  Notes: Netlify Forms integration
+
+Component: 3d-card.tsx
+  Location: src/components/ui/3d-card.tsx
+  Zone: shared
+  Used: YES (Sky, StorySection)
+  Animation: Perspective transforms on mouse move
+  Notes: Aceternity component - has useEffect warning
+
+Component: border-beam.tsx
+  Location: src/components/ui/border-beam.tsx
+  Zone: shared
+  Used: YES (StorySection)
+  Animation: Rotating beam gradient
+  Notes: Magic UI component
+
+Component: particles.tsx
+  Location: src/components/ui/particles.tsx
+  Zone: shared
+  Used: YES (StorySection, SecretDataCenter)
+  Animation: Canvas-based particle system
+  Notes: Has 3 useEffect warnings
+
+Component: background-beams.tsx
+  Location: src/components/ui/background-beams.tsx
+  Zone: datacenter
+  Used: YES (SecretDataCenter)
+  Animation: SVG animated beams
+  Notes: Aceternity component
+
+Component: floating-dock.tsx
+  Location: src/components/ui/floating-dock.tsx
+  Zone: shared
+  Used: YES (Navigation)
+  Animation: Dock magnification on hover
+  Notes: Aceternity component
+
+Component: text-generate-effect.tsx
+  Location: src/components/ui/text-generate-effect.tsx
+  Zone: sky
+  Used: YES (Sky)
+  Animation: Character-by-character text reveal
+  Notes: Aceternity component - has useEffect warning
+
+Component: typewriter-effect.tsx
+  Location: src/components/ui/typewriter-effect.tsx
+  Zone: datacenter
+  Used: YES (ContactForm)
+  Animation: Typewriter cursor + text reveal
+  Notes: Aceternity component - has useEffect warning
 ```
+
+**DEAD CODE (not imported anywhere active):**
+
+```
+Component: Forest.tsx
+  Location: src/components/zones/Forest.tsx
+  Zone: forest (legacy)
+  Used: NO
+  Notes: DEAD CODE - superseded by StorySection
+
+Component: RockyClimb.tsx
+  Location: src/components/zones/RockyClimb.tsx
+  Zone: rocky (legacy)
+  Used: NO
+  Notes: DEAD CODE - superseded by StorySection
+
+Component: CoastalOverlook.tsx
+  Location: src/components/zones/CoastalOverlook.tsx
+  Zone: coastal (legacy)
+  Used: NO
+  Notes: DEAD CODE - superseded by StorySection
+
+Component: Clouds.tsx
+  Location: src/components/effects/Clouds.tsx
+  Zone: sky (legacy)
+  Used: NO
+  Notes: DEAD CODE - never integrated
+
+Component: Parallax.tsx
+  Location: src/components/effects/Parallax.tsx
+  Zone: shared (legacy)
+  Used: NO (only by dead zone components)
+  Notes: DEAD CODE - only Forest/Rocky/Coastal import it
+
+Component: VideoBackground.tsx
+  Location: src/components/effects/VideoBackground.tsx
+  Zone: shared (legacy)
+  Used: NO
+  Notes: DEAD CODE - has <img> warnings, never integrated
+
+Component: ZoneBackground.tsx
+  Location: src/components/effects/ZoneBackground.tsx
+  Zone: shared (legacy)
+  Used: NO
+  Notes: DEAD CODE - never integrated
+
+Component: Groundhog.tsx
+  Location: src/components/ui/Groundhog.tsx
+  Zone: datacenter (legacy)
+  Used: NO
+  Notes: DEAD CODE - SecretDataCenter has own character handling
+
+Component: SkillCard.tsx
+  Location: src/components/ui/SkillCard.tsx
+  Zone: shared (legacy)
+  Used: NO (only by dead zone components)
+  Notes: DEAD CODE - only Forest/Rocky/Coastal import it
+
+Component: WildlifeSprite.tsx
+  Location: src/components/ui/WildlifeSprite.tsx
+  Zone: shared (legacy)
+  Used: NO
+  Notes: DEAD CODE - never integrated
+
+Component: sticky-scroll-reveal.tsx
+  Location: src/components/ui/sticky-scroll-reveal.tsx
+  Zone: shared (legacy)
+  Used: NO
+  Notes: DEAD CODE - StorySection has custom scroll implementation
+```
+
+**Summary:**
+- Active components: 17
+- Dead code components: 11
+- Recommendation: Archive dead code to `src/components/_archive/` in CLEANUP phase
 
 ### Asset Inventory  
 *(Agent fills this in during Task 3)*
