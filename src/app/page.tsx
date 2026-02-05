@@ -18,8 +18,7 @@ export default function Home() {
         toImage="/assets/forest/forest-background-v3.png"
         fromTint="rgba(135, 180, 200, 0.1)"
         toTint="rgba(30, 50, 35, 0.2)"
-        height="50vh"
-        mobileHeight="30vh"
+        heightClass="h-[30vh] md:h-[50vh]"
         className="transition-zone"
       />
 
@@ -32,22 +31,20 @@ export default function Home() {
         toImage="/assets/coastal/coastal-overlook-v3.png"
         fromTint="rgba(30, 50, 35, 0.2)"
         toTint="rgba(50, 80, 90, 0.1)"
-        height="50vh"
-        mobileHeight="30vh"
+        heightClass="h-[30vh] md:h-[50vh]"
         className="transition-zone"
       />
 
       {/* Story 2 - Coastal */}
       <CoastalOverlook />
 
-      {/* Transition: Coastal → Cave (longer, more dramatic) */}
+      {/* Transition: Coastal → Cave */}
       <TransitionZone
         fromImage="/assets/coastal/coastal-overlook-v3.png"
         toImage="/assets/cave/cave-transition-v3.png"
         fromTint="rgba(50, 80, 90, 0.1)"
         toTint="rgba(20, 15, 10, 0.4)"
-        height="70vh"
-        mobileHeight="50vh"
+        heightClass="h-[50vh] md:h-[70vh]"
         className="transition-zone"
       />
 

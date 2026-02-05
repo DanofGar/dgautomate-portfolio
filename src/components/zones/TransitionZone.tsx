@@ -8,8 +8,7 @@ interface TransitionZoneProps {
   toImage: string;
   fromTint?: string;
   toTint?: string;
-  height?: string;
-  mobileHeight?: string;
+  heightClass?: string;
   className?: string;
 }
 
@@ -18,15 +17,11 @@ export function TransitionZone({
   toImage,
   fromTint = 'rgba(0,0,0,0)',
   toTint = 'rgba(0,0,0,0)',
-  height = '50vh',
-  mobileHeight = '30vh',
+  heightClass = 'h-[50vh] md:h-[50vh]',
   className,
 }: TransitionZoneProps) {
   return (
-    <div
-      className={cn('relative overflow-hidden', className)}
-      style={{ height }}
-    >
+    <div className={cn('relative overflow-hidden', heightClass, className)}>
       {/* Layer from previous zone - fades out at bottom */}
       <div
         className="absolute inset-0"
@@ -59,15 +54,6 @@ export function TransitionZone({
           mixBlendMode: 'overlay',
         }}
       />
-
-      {/* Responsive height via CSS custom property */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          div:first-child {
-            height: ${mobileHeight} !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
