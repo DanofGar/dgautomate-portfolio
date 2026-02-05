@@ -48,7 +48,7 @@ export function OtterKey({
         filter: {
           repeat: Infinity,
           duration: 1.5,
-          ease: 'easeInOut',
+          ease: 'easeInOut' as const,
         },
         scale: {
           duration: 0.3,

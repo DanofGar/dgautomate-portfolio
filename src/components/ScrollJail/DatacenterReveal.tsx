@@ -140,14 +140,14 @@ function CritterSprite({
   isInView: boolean;
   delay: number;
 }) {
-  const animationVariants = {
+  const animationVariants: Record<string, { y?: number[]; x?: number[]; rotateY?: number[]; transition: object }> = {
     typing: {
       y: [0, -2, 0],
       transition: { repeat: Infinity, duration: 0.3, repeatDelay: 0.1 },
     },
     looking: {
       rotateY: [0, 15, 0, -15, 0],
-      transition: { repeat: Infinity, duration: 4, ease: 'easeInOut' },
+      transition: { repeat: Infinity, duration: 4, ease: 'easeInOut' as const },
     },
     walking: {
       x: [0, 10, 0],
@@ -155,7 +155,7 @@ function CritterSprite({
     },
     idle: {
       y: [0, -3, 0],
-      transition: { repeat: Infinity, duration: 3, ease: 'easeInOut' },
+      transition: { repeat: Infinity, duration: 3, ease: 'easeInOut' as const },
     },
   };
 
