@@ -1,6 +1,8 @@
 # SCROLL_ARCHITECTURE.md
 # Scroll Zone Map & Behavior
 
+**Updated:** 2026-02-05 (Rocky zone removed)
+
 ---
 
 ## Scroll Map
@@ -8,38 +10,34 @@
 ```
 0vh ────── HERO: Sky (100vh, full viewport lock)
            snap: mandatory
+           Name "Daniel Garcia" TOP RIGHT, parallax behind horizon
 
 100vh ──── TRANSITION: Sky → Forest (50vh desktop / 30vh mobile)
            Background crossfade via mask-image
-           Altitude meter: +500ft → +350ft
+           Altitude meter: +500ft → +200ft
            No snap alignment
 
 150vh ──── STORY 1: "People First" / Forest (100vh)
            snap: proximity (desktop) / mandatory (mobile)
-           Altitude: +350ft → +200ft
-
-250vh ──── TRANSITION: Forest → Rocky (50vh / 30vh)
-
-300vh ──── STORY 2: "Breaking Things" / Rocky (100vh)
-           snap: proximity / mandatory
            Altitude: +200ft → +50ft
+           Text zone: left side (darker canopy area)
 
-400vh ──── TRANSITION: Rocky → Coastal (50vh / 30vh)
+250vh ──── TRANSITION: Forest → Coastal (50vh / 30vh)
 
-450vh ──── STORY 3: "Automation Obsession" / Coastal (80vh)
+300vh ──── STORY 2: "Automation Obsession" / Coastal (100vh)
            snap: proximity / mandatory
            Altitude: +50ft → 0ft
 
-530vh ──── TRANSITION: Coastal → Cave (70vh / 50vh)
+400vh ──── TRANSITION: Coastal → Cave (70vh / 50vh)
            Most dramatic transition — darkening, immersion
            Altitude: 0ft → -50ft
 
-600vh ──── DATACENTER: Easter Egg Zone (100vh)
+470vh ──── DATACENTER: Easter Egg Zone (100vh)
            snap: mandatory
            Altitude: -100ft
 ```
 
-Total scroll distance: ~700vh desktop / ~580vh mobile
+Total scroll distance: ~570vh desktop / ~470vh mobile
 
 ## CSS Implementation
 
@@ -112,8 +110,8 @@ html {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    var(--from-zone-tint),   /* e.g., rgba(34,80,20,0.3) for forest */
-    var(--to-zone-tint)      /* e.g., rgba(120,90,60,0.3) for rocky */
+    var(--from-zone-tint),
+    var(--to-zone-tint)
   );
   mix-blend-mode: overlay;
   pointer-events: none;
