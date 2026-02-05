@@ -63,7 +63,7 @@ human judgment at each step.
 | 2 | forest-bg | APPROVED | v1 | None | Approved 2026-02-05 |
 | 3 | rocky-bg | APPROVED | v1 | None | Approved 2026-02-05 |
 | 4 | coastal-bg | APPROVED | v1 | None | Approved 2026-02-05 |
-| 5 | cave-transition | PENDING_HUMAN_REVIEW | v1 | None | Generated 2026-02-05, used coastal-bg as ref |
+| 5 | cave-transition | PENDING_HUMAN_REVIEW | v2 | None | v2: darker mood, water, warm distant glow |
 | 6 | datacenter-bg | NEEDS_MODIFICATION | v3 | Waiting on cave-transition APPROVED | Add cave-ceiling to top edge |
 | 7 | groundhog-scientist | NEEDS_COMPOSITE_TEST | v2 | Waiting on datacenter-bg for composite | BG removed, 126KB WebP |
 | 8 | groundhog-security | NEEDS_COMPOSITE_TEST | v2 | Waiting on datacenter-bg for composite | BG removed, 99KB WebP |
