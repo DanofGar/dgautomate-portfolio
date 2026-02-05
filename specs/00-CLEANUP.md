@@ -1,7 +1,7 @@
 # 00-CLEANUP.md
 # Phase: CLEANUP — Audit & Consolidate Before Building
 
-**Status:** NOT_STARTED  
+**Status:** COMPLETE  
 **Branch:** `chore/cleanup-and-consolidate`  
 **Prereq:** None — this is the first phase
 
@@ -172,7 +172,7 @@ After completing a task, git commit immediately.
 - **Commit:** `chore(cleanup): triage veo-prompts` (if moved)
 
 ### 10. Final state
-- **Status:** NOT_STARTED
+- **Status:** COMPLETE
 - **Action:**
   - Run `npm run build` one final time — must pass clean
   - Run `git log --oneline` — verify all cleanup commits are present
