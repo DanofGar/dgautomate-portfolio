@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-02-05
 **Branch:** `asset/v3-backgrounds`
-**Status:** Visual foundation complete, content restructure needed
+**Status:** Visual foundation complete, content structure finalized, copy drafted
 
 ---
 
@@ -37,48 +37,59 @@
 
 ---
 
-## Content Structure (REVISED)
+## Content Structure (FINALIZED 2026-02-05)
 
 ```
 ┌─────────────────────────────────────────────────────┐
 │  SKY (Hero)                                         │
 │  "Daniel Garcia"                                    │
-│  Sales & Operations | AI-Enabled Problem Solver     │
-│  Tagline: Invite to explore (NOT developer-speak)   │
+│  "I used to close deals. Now I build the tools     │
+│   that help others do the same."                    │
 │  Location: Cincinnati, OH                           │
 └─────────────────────────────────────────────────────┘
           ↓
 ┌─────────────────────────────────────────────────────┐
-│  FOREST (The Paths I've Taken)                      │
-│  Theme: Varied experience, different paths          │
-│  Journey: Govt affairs → Sales → Account Mgmt →     │
-│           Sales Ops → AI enablement                 │
-│  This is where automation/AI tools story lives      │
-│  "Each path taught me something new"                │
+│  TRAIL (Career Journey) ← NEW SECTION               │
+│  Asset needed: Mountain trail descending above      │
+│  clouds (Big Sur style, matches existing assets)    │
+│                                                     │
+│  Content:                                           │
+│  "Where I've been:"                                 │
+│  Staffing & HR Tech · eCommerce & Logistics ·       │
+│  Hydroponics · Government & Tourism                 │
+│                                                     │
+│  "At Indeed Flex, I helped build the intelligence   │
+│  layer behind an AI sales agent — scoring logic,    │
+│  data routing, multi-agent workflows. Tens of       │
+│  millions in pipeline. Still running."              │
+│                                                     │
+│  "(This site? Same approach — just for fun.)"       │
+└─────────────────────────────────────────────────────┘
+          ↓
+┌─────────────────────────────────────────────────────┐
+│  FOREST (The Approach)                              │
+│  Theme: Enterprise thinking, any size problem       │
+│                                                     │
+│  Content:                                           │
+│  "Enterprise thinking. Any size problem."           │
+│                                                     │
+│  "Find the signal. Design the logic.                │
+│   Automate the decision."                           │
 └─────────────────────────────────────────────────────┘
           ↓
 ┌─────────────────────────────────────────────────────┐
 │  COASTAL (Understanding People)                     │
-│  Theme: "Business problems are people problems"     │
-│  Psychology + business education                    │
-│  How understanding people informs approach to       │
-│  sales, operations, and solutions                   │
+│  Theme: People + business acumen                    │
+│  Psychology background + business education         │
+│  Content: TBD - something about understanding       │
+│  people informing how you build solutions           │
 └─────────────────────────────────────────────────────┘
           ↓
 ┌─────────────────────────────────────────────────────┐
-│  [NEW SECTION NEEDED] - Rocky or similar            │
-│  Theme: "What I'm Building Now"                     │
-│  Current projects, this site, tools for SMBs       │
-│  Proof section - show don't tell                    │
-│  (May need new background asset or repurpose)       │
-└─────────────────────────────────────────────────────┘
-          ↓
-┌─────────────────────────────────────────────────────┐
-│  CAVE (Where I'm Going)                             │
-│  Theme: Applying expertise to create real tools     │
-│  "Now I'm learning to build tools and workflows     │
-│   that help me in personal life and for businesses" │
-│  Contact CTA + path to recruiter section            │
+│  CAVE (Thanks for the Journey)                      │
+│  Theme: Closing, gratitude, contact                 │
+│  Socials: LinkedIn, Email, GitHub                   │
+│  Easter egg path → Datacenter                       │
 └─────────────────────────────────────────────────────┘
           ↓ (easter egg / recruiter path)
 ┌─────────────────────────────────────────────────────┐
@@ -112,34 +123,57 @@
 ```
 public/assets/
 ├── sky/sky-background-v3.png         ← Hero
-├── forest/forest-background-v3.png   ← Paths/Journey
+├── trail/ (NEEDED)                   ← Career Journey (new section)
+├── forest/forest-background-v3.png   ← The Approach
 ├── coastal/coastal-overlook-v3.png   ← People/Psychology
-├── cave/cave-transition-v3.png       ← Where I'm Going
+├── cave/cave-transition-v3.png       ← Thanks/Closing
 └── datacenter/datacenter-background-v4.png  ← Recruiter section
 ```
+
+**Trail asset prompt (for Imagen 4.0):**
+```
+Mountain trail descending along a grassy hillside above a sea of clouds.
+Dirt path winding down from upper right to lower left of frame. No people.
+Clear blue sky with wispy clouds at top. Golden-brown grass and low scrub
+vegetation on rolling hills, worn dirt trail clearly visible. Left side:
+dramatic sea of clouds filling valley below, sunlight reflecting off cloud
+tops. Trail continues downward at bottom, sparse coastal trees beginning
+to appear. Photorealistic, cinematic, golden hour lighting, Big Sur
+California coastal mountains, warm color grading, 35mm film look,
+slight atmospheric haze.
+```
+Aspect ratio: 16:9. Requires Imagen billing (Tier 2+).
 
 ---
 
 ## What Needs To Change
 
-### Content Updates (Priority)
+### Assets Needed
 
-1. **Sky (Hero)**: Update tagline - NOT "I build systems so I can go outside" - something inviting and non-developer
-2. **Forest**: Change from "People First" to "The Paths I've Taken" - journey/experience focus
-3. **Coastal**: Change from "Automation Obsession" to people/psychology theme
-4. **Cave**: Update from "end of trail" to "where I'm going" / applying expertise
-5. **Add section**: May need 5th zone between Coastal and Cave for "What I'm Building"
+1. **Trail background** - Generate using prompt above (requires Imagen billing)
 
-### Features to Add
+### Code Changes Needed
 
-1. Wire up `Navigation.tsx` floating dock
-2. Add contact info (Email: Dnlg2400@gmail.com, GitHub: DanofGar, LinkedIn)
-3. Create recruiter path to Datacenter section
-4. Consider adding current projects/proof section
+1. **Add Trail section** - New component between Sky and Forest
+2. **Update Sky.tsx** - New headline copy
+3. **Update Forest.tsx** - Change to "The Approach" content
+4. **Update Coastal.tsx** - Finalize people/psychology content
+5. **Update Cave.tsx** - Thanks + socials
+6. Wire up `Navigation.tsx` floating dock
+7. Create recruiter easter egg path to Datacenter
 
-### Content to Write
+### Content Status
 
-Need casual, first-person copy for each section. Tone: warm, confident, not corporate.
+| Section | Copy Status |
+|---------|-------------|
+| Sky | ✅ Finalized |
+| Trail | ✅ Finalized |
+| Forest | ✅ Finalized |
+| Coastal | ⏳ TBD - people/psychology theme |
+| Cave | ⏳ TBD - thanks + socials |
+| Datacenter | ⏳ Existing content needs review |
+
+**Tone:** Warm, confident, conversational. NOT corporate or developer-speak.
 
 ---
 
@@ -192,10 +226,11 @@ npm run dev
 
 **Key files to edit:**
 - `src/components/zones/Sky.tsx` - Hero content
-- `src/components/zones/Forest.tsx` - Paths/Journey content
+- `src/components/zones/Trail.tsx` - NEW: Career journey (create this)
+- `src/components/zones/Forest.tsx` - The Approach content
 - `src/components/zones/CoastalOverlook.tsx` - People content
-- `src/components/zones/Cave.tsx` - Where I'm going content
-- `src/app/page.tsx` - Page assembly, add Navigation
+- `src/components/zones/Cave.tsx` - Thanks + socials
+- `src/app/page.tsx` - Page assembly, add Trail + Navigation
 
 **Read first:**
 - This file (HANDOFF.md)
