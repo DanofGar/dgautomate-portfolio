@@ -49,7 +49,7 @@ After completing a task, git commit immediately.
 - **Commit:** `docs(cleanup): component audit results`
 
 ### 3. Audit existing assets
-- **Status:** NOT_STARTED
+- **Status:** IN_PROGRESS (audit complete, archiving next)
 - **Action:** Check every file in `public/assets/`. For each, note:
   - Dimensions and file size
   - Whether it has transparency (characters/wildlife) or not (backgrounds)
@@ -395,29 +395,195 @@ Component: sticky-scroll-reveal.tsx
 - Dead code components: 11
 - Recommendation: Archive dead code to `src/components/_archive/` in CLEANUP phase
 
-### Asset Inventory  
-*(Agent fills this in during Task 3)*
+### Asset Inventory
+*(Completed 2026-02-05)*
 
+**ZONE BACKGROUNDS (keep):**
 ```
-Asset: [filename]
-  Location: public/assets/[path]
-  Dimensions: [WxH]
-  Size: [KB/MB]
-  Transparency: [yes|no]
-  Referenced in code: [yes|no — cite component]
-  Quality: [keep|regen|archive]
-  Action: [keep in place|archive to assets/archive/[subfolder]|needs regen in ASSETS phase]
-  Notes: [observations]
+Asset: hero-sky-v1.png
+  Location: public/assets/sky/
+  Size: 1.4MB
+  Referenced: YES (Sky.tsx via storyContent)
+  Action: KEEP
+  Notes: Hero background
+
+Asset: sky-background-v2.png
+  Location: public/assets/sky/
+  Size: 1.7MB
+  Referenced: YES (Sky.tsx)
+  Action: KEEP (evaluate if duplicate of hero)
+
+Asset: forest-background-v2.png
+  Location: public/assets/forest/
+  Size: 2.1MB
+  Referenced: YES (StorySection.tsx)
+  Action: KEEP
+
+Asset: rocky-climb-v2.png
+  Location: public/assets/rocky/
+  Size: 2.2MB
+  Referenced: YES (StorySection.tsx)
+  Action: KEEP
+
+Asset: coastal-overlook-v2.png
+  Location: public/assets/coastal/
+  Size: 1.8MB
+  Referenced: YES (StorySection.tsx)
+  Action: KEEP
+
+Asset: datacenter-background-v3.png
+  Location: public/assets/datacenter/
+  Size: 1.3MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: KEEP
+```
+
+**CHARACTERS (per DESIGN_DECISIONS.md - minimize to datacenter only):**
+```
+Asset: groundhog-scientist-v2.png
+  Location: public/assets/characters/
+  Size: 1.2MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: KEEP (primary character)
+
+Asset: security-guard.png
+  Location: public/assets/characters/
+  Size: 1.2MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: KEEP (animated mover)
+
+Asset: coffee-runner.png
+  Location: public/assets/characters/
+  Size: 880KB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+  Notes: Per DESIGN_DECISIONS.md - minimize characters
+
+Asset: data-analyst.png
+  Location: public/assets/characters/
+  Size: 1.1MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+
+Asset: intern.png
+  Location: public/assets/characters/
+  Size: 1.0MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+
+Asset: karaoke-singer.png
+  Location: public/assets/characters/
+  Size: 1.2MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+
+Asset: network-engineer.png
+  Location: public/assets/characters/
+  Size: 1.4MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+
+Asset: senior-architect.png
+  Location: public/assets/characters/
+  Size: 1.4MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+
+Asset: server-technician.png
+  Location: public/assets/characters/
+  Size: 1.3MB
+  Referenced: YES (SecretDataCenter.tsx)
+  Action: ARCHIVE → public/assets/archive/characters/
+```
+
+**WILDLIFE (per DESIGN_DECISIONS.md - archive all, landscapes only):**
+```
+Asset: pelican-silhouette.png
+  Location: public/assets/sky/wildlife/
+  Size: 786KB
+  Referenced: YES (code ref exists but may be dead path)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+
+Asset: banana-slug-small.png
+  Location: public/assets/forest/wildlife/
+  Size: 680KB
+  Referenced: YES (StorySection.tsx)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+
+Asset: stellers-jay-realistic.png
+  Location: public/assets/forest/wildlife/
+  Size: 674KB
+  Referenced: YES (StorySection.tsx)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+
+Asset: california-quail-realistic.png
+  Location: public/assets/rocky/wildlife/
+  Size: 1.0MB
+  Referenced: YES (StorySection.tsx)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+
+Asset: fence-lizard-realistic.png
+  Location: public/assets/rocky/wildlife/
+  Size: 1.1MB
+  Referenced: YES (StorySection.tsx)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+
+Asset: cormorant-realistic.png
+  Location: public/assets/coastal/wildlife/
+  Size: 956KB
+  Referenced: NO (orphaned)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+
+Asset: sea-otter-realistic.png
+  Location: public/assets/coastal/wildlife/
+  Size: 1.4MB
+  Referenced: YES (StorySection.tsx)
+  Action: ARCHIVE → public/assets/archive/wildlife/
+```
+
+**LEGACY/OTHER:**
+```
+Asset: underground-transition-v2.png
+  Location: public/assets/burrows/
+  Size: 1.8MB
+  Referenced: YES (code ref exists)
+  Action: ARCHIVE → public/assets/archive/burrows/
+  Notes: Underground zones removed
+
+Asset: datacenter-loop.mp4
+  Location: public/assets/videos/
+  Size: 2.0MB
+  Referenced: NO (orphaned)
+  Action: KEEP (per PERFORMANCE_BUDGET.md)
+  Notes: May be used for datacenter video background
+
+Asset: roots/ directory
+  Location: public/assets/roots/
+  Size: 0B (empty)
+  Action: DELETE (empty directory)
 ```
 
 ### Archived Assets Summary
-*(Agent fills this in after Task 3 archiving)*
+*(To be updated after archiving)*
 
 ```
-Total archived characters: [count] ([size]MB)
-Total archived wildlife: [count] ([size]MB)
-Total space freed from active assets: [size]MB
-Remaining active assets: [count] ([size]MB)
+Characters to archive: 7 (~8.2MB)
+  - coffee-runner.png, data-analyst.png, intern.png, karaoke-singer.png
+  - network-engineer.png, senior-architect.png, server-technician.png
+
+Wildlife to archive: 7 (~6.5MB)
+  - pelican-silhouette.png, banana-slug-small.png, stellers-jay-realistic.png
+  - california-quail-realistic.png, fence-lizard-realistic.png
+  - cormorant-realistic.png, sea-otter-realistic.png
+
+Legacy to archive: 1 (~1.8MB)
+  - underground-transition-v2.png
+
+Total to archive: 15 assets (~16.5MB)
+Remaining active assets after archive: 9 (~14.5MB)
+  - 6 zone backgrounds
+  - 2 characters (scientist, security-guard)
+  - 1 video (datacenter-loop.mp4)
 ```
 
 ### Build Warning Log
