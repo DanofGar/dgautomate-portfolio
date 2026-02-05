@@ -1,5 +1,9 @@
 # STYLING_GUIDE.md - Digital Naturalism for dgautomate.dev
 
+> **v3 NOTICE:** This guide is being superseded by the `specs/` files for the
+> v3 refactor. For current specifications, refer to `specs/AGENT_ROUTER.md`.
+> This document is retained for reference but may contain outdated information.
+
 *Source: Component Library Research (Gemini Deep Research, Feb 2026)*
 *Theme: Big Sur / Garrapata Trail - "The Naturalist Engineer"*
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface VideoBackgroundProps {
@@ -63,10 +64,12 @@ export function VideoBackground({
   if (prefersReducedMotion && poster) {
     return (
       <div className={cn('absolute inset-0', className)}>
-        <img
+        <Image
           src={poster}
           alt=""
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          unoptimized
         />
         {overlay && (
           <div
@@ -104,10 +107,12 @@ export function VideoBackground({
 
       {/* Poster fallback while loading */}
       {!isLoaded && poster && (
-        <img
+        <Image
           src={poster}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          className="object-cover"
+          unoptimized
         />
       )}
 

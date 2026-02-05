@@ -1,169 +1,57 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SkillCard } from '@/components/ui/SkillCard';
-import { Parallax } from '@/components/effects/Parallax';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 export function CoastalOverlook() {
-  const systemsSkills = [
-    'API integrations & workflow automation',
-    'AI-powered systems & tooling',
-    'Process optimization & efficiency',
-    'Technical documentation & training',
-  ];
-
   return (
-    <section
-      className={cn(
-        'relative min-h-screen w-full',
-        'flex flex-col items-center justify-center',
-        'bg-gradient-to-b from-ground-gray via-sky-dark to-sky',
-        'py-24 px-4',
-        'overflow-hidden'
-      )}
-    >
-      {/* Ocean horizon in background with parallax */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Distant ocean - slowest parallax */}
-        <Parallax speed={0.2}>
-          <div
-            className={cn(
-              'absolute bottom-0 left-0 right-0',
-              'h-1/3',
-              'bg-gradient-to-b from-sky-dark to-sky',
-              'opacity-40'
-            )}
-          />
-        </Parallax>
-
-        {/* Gentle waves - medium parallax */}
-        {[...Array(4)].map((_, i) => (
-          <Parallax key={i} speed={0.4}>
-            <motion.div
-              className={cn(
-                'absolute',
-                'bg-gradient-to-r from-transparent via-sky-light/30 to-transparent',
-                'h-1'
-              )}
-              style={{
-                bottom: `${5 + i * 3}%`,
-                left: 0,
-                right: 0,
-              }}
-              animate={{
-                x: ['-100%', '100%'],
-                opacity: [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: 8 + i * 2,
-                repeat: Infinity,
-                ease: 'linear',
-                delay: i * 1.5,
-              }}
-            />
-          </Parallax>
-        ))}
-
-        {/* Coastal vegetation silhouettes - fastest parallax (foreground) */}
-        {[...Array(6)].map((_, i) => (
-          <Parallax key={`plant-${i}`} speed={0.7}>
-            <motion.div
-              className={cn(
-                'absolute bottom-0',
-                'bg-gradient-to-t from-ground-sage to-transparent',
-                'rounded-t-full opacity-20'
-              )}
-              style={{
-                left: `${15 + i * 15}%`,
-                width: `${30 + Math.random() * 20}px`,
-                height: `${20 + Math.random() * 15}%`,
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 0.2, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: i * 0.1,
-              }}
-            />
-          </Parallax>
-        ))}
+    <section className="relative h-screen w-full overflow-hidden scroll-snap-align-start">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/assets/coastal/coastal-overlook-v3.png"
+          alt="Big Sur coastal overlook"
+          fill
+          className="object-cover object-top md:object-center"
+          quality={90}
+        />
+        {/* Top gradient from previous section */}
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/60 to-transparent" />
+        {/* Bottom gradient for transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-black/70" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      {/* Content - Top area where sky is darker, with backdrop */}
+      <div className="relative z-10 h-full flex items-start pt-32 md:pt-24 px-6 md:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mb-12"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-20%' }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-lg"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            The Coastal Overlook
-          </h2>
-          <p className="text-xl text-foreground/80 font-medium">
-            Systems & Automation · Connecting the dots
-          </p>
-          <p className="text-sm text-foreground/60 mt-2 font-mono">Sea Level • 0 ft</p>
-        </motion.div>
-
-        {/* Skill card */}
-        <div className="max-w-2xl mx-auto">
-          <SkillCard title="Systems & Automation" items={systemsSkills} delay={0.3} />
-        </div>
-
-        {/* Proof point */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.6,
-            delay: 0.8,
-          }}
-          className={cn(
-            'mt-8 p-4 rounded-soft',
-            'bg-background/60 backdrop-blur-sm',
-            'border border-foreground/10',
-            'max-w-2xl mx-auto'
-          )}
-        >
-          <p className="text-foreground/70 text-sm">
-            <span className="font-semibold text-foreground">Indeed Flex:</span> Built Claude-powered
-            automation tools to streamline team workflows, reducing manual tasks by 60% and enabling
-            faster response times
-          </p>
-        </motion.div>
-
-        {/* Hint about going underground */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 1,
-            delay: 1.5,
-            }}
-          className="mt-16"
-        >
-          <motion.div
-            animate={{
-              y: [0, 8, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="text-foreground/40 text-sm"
-          >
-            ↓ Keep scrolling... there&apos;s more below ↓
-          </motion.div>
+          {/* Text container with backdrop */}
+          <div className="bg-black/50 backdrop-blur-sm rounded-xl p-6 md:p-8">
+            <h2
+              className={cn(
+                'font-serif text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6',
+                'text-warm-white text-shadow-readable'
+              )}
+            >
+              The Automation Obsession
+            </h2>
+            <p
+              className={cn(
+                'font-body text-base md:text-lg lg:text-xl leading-relaxed',
+                'text-warm-white/90'
+              )}
+            >
+              Now I spend my time teaching computers to do the boring stuff
+              so humans can do the interesting stuff. It&apos;s basically
+              professional laziness, but productive.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

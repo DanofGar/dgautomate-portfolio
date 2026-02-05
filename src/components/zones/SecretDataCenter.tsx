@@ -14,31 +14,12 @@ interface EasterEggState {
   singing: boolean;
 }
 
-// Character asset paths
+// Character asset paths (minimized per DESIGN_DECISIONS.md)
 const CHARACTERS = {
   scientist: '/assets/characters/groundhog-scientist-v2.png',
-  coffeeRunner: '/assets/characters/coffee-runner.png',
   securityGuard: '/assets/characters/security-guard.png',
-  networkEngineer: '/assets/characters/network-engineer.png',
-  serverTechnician: '/assets/characters/server-technician.png',
-  dataAnalyst: '/assets/characters/data-analyst.png',
-  seniorArchitect: '/assets/characters/senior-architect.png',
-  intern: '/assets/characters/intern.png',
-  karaokeSinger: '/assets/characters/karaoke-singer.png',
 } as const;
 
-// Karaoke lyrics for the terminal easter egg
-const KARAOKE_LYRICS = [
-  { text: "I'm walking on sunshine", highlight: false },
-  { text: "Whoa-oh!", highlight: false },
-  { text: "I'm walking on sunshine", highlight: false },
-  { text: "Whoa-oh!", highlight: false },
-  { text: "I'm walking on sunshine", highlight: true },
-  { text: "Whoa-oh!", highlight: false },
-  { text: "And don't it feel good!", highlight: false },
-  { text: "Hey! Alright now!", highlight: false },
-  { text: "And don't it feel good!", highlight: false },
-];
 
 // Stationary character component with optional subtle breathing animation
 function StationaryCharacter({
@@ -143,66 +124,6 @@ function AnimatedMover({
   );
 }
 
-// Lyrics terminal component with scrolling animation
-function LyricsTerminal({ isActive }: { isActive: boolean }) {
-  return (
-    <div
-      className={cn(
-        'absolute bg-background/90 border-2 border-datacenter-terminal/60 rounded-lg overflow-hidden',
-        'w-[140px] h-[100px] md:w-[180px] md:h-[120px]',
-        'font-mono text-[10px] md:text-xs'
-      )}
-      style={{
-        right: '18%',
-        bottom: '32%',
-        zIndex: 25,
-      }}
-    >
-      {/* Terminal header */}
-      <div className="bg-datacenter-terminal/20 px-2 py-1 border-b border-datacenter-terminal/30 flex items-center gap-1">
-        <div className="w-2 h-2 rounded-full bg-red-500/70" />
-        <div className="w-2 h-2 rounded-full bg-yellow-500/70" />
-        <div className="w-2 h-2 rounded-full bg-green-500/70" />
-        <span className="ml-2 text-datacenter-terminal/70 text-[8px]">
-          karaoke.exe
-        </span>
-      </div>
-
-      {/* Scrolling lyrics */}
-      <div className="relative h-[calc(100%-24px)] overflow-hidden">
-        <motion.div
-          className="absolute w-full"
-          animate={
-            isActive
-              ? {
-                  y: ['0%', '-50%'],
-                }
-              : undefined
-          }
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        >
-          {[...KARAOKE_LYRICS, ...KARAOKE_LYRICS].map((line, i) => (
-            <div
-              key={i}
-              className={cn(
-                'px-2 py-0.5 transition-colors',
-                line.highlight
-                  ? 'text-datacenter-terminal font-bold bg-datacenter-terminal/20'
-                  : 'text-foreground/50'
-              )}
-            >
-              ♪ {line.text}
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
 
 export function SecretDataCenter() {
   const [easterEggs, setEasterEggs] = useState<EasterEggState>({
@@ -260,7 +181,7 @@ export function SecretDataCenter() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background/60" />
       </div>
 
-      {/* Character layers - Stationary characters at workstations */}
+      {/* Character layers - Minimized per DESIGN_DECISIONS.md */}
       <div className="absolute inset-0" style={{ zIndex: 10 }}>
         {/* Scientist - Central workstation */}
         <StationaryCharacter
@@ -268,79 +189,9 @@ export function SecretDataCenter() {
           alt="Groundhog scientist at central workstation"
           style={{ left: '45%', bottom: '35%' }}
         />
-
-        {/* Network Engineer - Server rack area (left side) */}
-        <StationaryCharacter
-          src={CHARACTERS.networkEngineer}
-          alt="Network engineer groundhog at server rack"
-          style={{ left: '12%', bottom: '38%' }}
-        />
-
-        {/* Server Technician - Crouched at panel */}
-        <StationaryCharacter
-          src={CHARACTERS.serverTechnician}
-          alt="Server technician groundhog at panel"
-          style={{ left: '22%', bottom: '28%' }}
-        />
-
-        {/* Data Analyst - At monitors */}
-        <StationaryCharacter
-          src={CHARACTERS.dataAnalyst}
-          alt="Data analyst groundhog studying charts"
-          style={{ left: '55%', bottom: '40%' }}
-        />
-
-        {/* Senior Architect - Drafting desk (right area) */}
-        <StationaryCharacter
-          src={CHARACTERS.seniorArchitect}
-          alt="Senior architect groundhog at drafting desk"
-          style={{ right: '25%', bottom: '35%' }}
-        />
-
-        {/* Intern - Supply area with boxes */}
-        <StationaryCharacter
-          src={CHARACTERS.intern}
-          alt="Intern groundhog carrying boxes"
-          style={{ right: '8%', bottom: '25%' }}
-          breathe={false}
-        />
-
-        {/* Karaoke Singer - Next to lyrics terminal */}
-        <motion.div
-          className="absolute pointer-events-none select-none"
-          style={{ right: '12%', bottom: '32%', zIndex: 20 }}
-          animate={{
-            rotate: [-3, 3, -3],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        >
-          <Image
-            src={CHARACTERS.karaokeSinger}
-            alt="Karaoke singer groundhog performing"
-            width={120}
-            height={160}
-            className="w-auto h-auto max-h-[120px] md:max-h-[160px] object-contain"
-          />
-        </motion.div>
-
-        {/* Lyrics Terminal Easter Egg - next to Karaoke Singer */}
-        <LyricsTerminal isActive={true} />
       </div>
 
-      {/* Animated movers - highest z-index for foreground movement */}
-      {/* Coffee Runner - slides left to right, 8-10s loop */}
-      <AnimatedMover
-        src={CHARACTERS.coffeeRunner}
-        alt="Coffee runner groundhog with tray"
-        direction="right"
-        duration={9}
-      />
-
-      {/* Security Guard - patrols opposite direction, slower 12s loop */}
+      {/* Security Guard - patrols the datacenter */}
       <AnimatedMover
         src={CHARACTERS.securityGuard}
         alt="Security guard groundhog on patrol"
