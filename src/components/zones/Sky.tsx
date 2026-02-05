@@ -1,4 +1,3 @@
-// src/components/zones/Sky.tsx
 'use client';
 
 import { motion } from 'framer-motion';
@@ -7,20 +6,22 @@ import { cn } from '@/lib/utils';
 
 export function Sky() {
   return (
-    <section className="zone relative h-screen w-full overflow-hidden scroll-snap-align-start">
+    <section className="relative h-screen w-full overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/assets/sky/sky-background-v3.png"
           alt="California sky at golden hour"
           fill
-          className="object-cover object-bottom"
+          className="object-cover object-top md:object-center"
           priority
           quality={90}
         />
+        {/* Bottom gradient for transition to next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-black/60" />
       </div>
 
-      {/* Name - Top Right per spec */}
+      {/* Name - Top Right on desktop, centered on mobile */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,22 +39,25 @@ export function Sky() {
         </h1>
       </motion.div>
 
-      {/* Hook line - Center bottom area */}
+      {/* Hook line - with backdrop for readability */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-32 left-0 right-0 z-10 px-8"
+        className="absolute bottom-24 md:bottom-32 left-0 right-0 z-10 px-6 md:px-8"
       >
-        <p
-          className={cn(
-            'font-body text-xl md:text-2xl',
-            'text-warm-white text-shadow-readable',
-            'text-center max-w-2xl mx-auto'
-          )}
-        >
-          I build systems that work while I sleep.
-        </p>
+        {/* Text backdrop */}
+        <div className="mx-auto max-w-2xl rounded-lg bg-black/40 backdrop-blur-sm px-6 py-4">
+          <p
+            className={cn(
+              'font-body text-lg md:text-2xl',
+              'text-warm-white text-shadow-readable',
+              'text-center'
+            )}
+          >
+            I build systems that work while I sleep.
+          </p>
+        </div>
       </motion.div>
 
       {/* Scroll indicator */}
@@ -61,7 +65,7 @@ export function Sky() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
