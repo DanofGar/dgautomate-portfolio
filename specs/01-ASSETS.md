@@ -1,7 +1,7 @@
 # 01-ASSETS.md
 # Phase: ASSETS — Generate, Process, Approve All Visual Assets
 
-**Status:** BLOCKED (waiting on CLEANUP phase)  
+**Status:** IN_PROGRESS  
 **Branch:** `asset/v3-backgrounds`  
 **Prereq:** CLEANUP phase complete, audit results available in `specs/00-CLEANUP.md`
 
@@ -59,14 +59,14 @@ human judgment at each step.
 
 | # | Asset | Status | Version | Blocker | Human Notes |
 |---|-------|--------|---------|---------|-------------|
-| 1 | sky-hero | NEEDS_GENERATION | v0 | None — start here | Style anchor for everything |
+| 1 | sky-hero | PENDING_HUMAN_REVIEW | v1 | None | Generated 2026-02-05, awaiting approval |
 | 2 | forest-bg | BLOCKED | v0 | Waiting on sky-hero APPROVED | |
 | 3 | rocky-bg | BLOCKED | v0 | Waiting on forest-bg APPROVED | |
 | 4 | coastal-bg | BLOCKED | v0 | Waiting on rocky-bg APPROVED | |
 | 5 | cave-transition | BLOCKED | v0 | Waiting on coastal-bg APPROVED | NEW — bridges coastal→datacenter |
 | 6 | datacenter-bg | NEEDS_MODIFICATION | v3 | Waiting on cave-transition APPROVED | Add cave-ceiling to top edge |
-| 7 | groundhog-scientist | NEEDS_BG_REMOVAL | v2 | None — can run parallel to backgrounds | |
-| 8 | groundhog-security | NEEDS_BG_REMOVAL | v2 | None — can run parallel to backgrounds | |
+| 7 | groundhog-scientist | NEEDS_COMPOSITE_TEST | v2 | Waiting on datacenter-bg for composite | BG removed, 126KB WebP |
+| 8 | groundhog-security | NEEDS_COMPOSITE_TEST | v2 | Waiting on datacenter-bg for composite | BG removed, 99KB WebP |
 
 ### Status Values
 - `NEEDS_GENERATION` — Ready for Imagen 3 generation
