@@ -60,8 +60,8 @@ human judgment at each step.
 | # | Asset | Status | Version | Blocker | Human Notes |
 |---|-------|--------|---------|---------|-------------|
 | 1 | sky-hero | APPROVED | v1 | None | Approved 2026-02-05 |
-| 2 | forest-bg | PENDING_HUMAN_REVIEW | v1 | None | Generated 2026-02-05, used sky-hero as ref |
-| 3 | rocky-bg | BLOCKED | v0 | Waiting on forest-bg APPROVED | |
+| 2 | forest-bg | APPROVED | v1 | None | Approved 2026-02-05 |
+| 3 | rocky-bg | PENDING_HUMAN_REVIEW | v1 | None | Generated 2026-02-05, used forest-bg as ref |
 | 4 | coastal-bg | BLOCKED | v0 | Waiting on rocky-bg APPROVED | |
 | 5 | cave-transition | BLOCKED | v0 | Waiting on coastal-bg APPROVED | NEW — bridges coastal→datacenter |
 | 6 | datacenter-bg | NEEDS_MODIFICATION | v3 | Waiting on cave-transition APPROVED | Add cave-ceiling to top edge |
