@@ -80,3 +80,23 @@
     transparent 100%
   );
 }
+
+/* Scroll snap behavior per SCROLL_ARCHITECTURE.md */
+html {
+  scroll-snap-type: y proximity;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+}
+
+.scroll-snap-align-start {
+  scroll-snap-align: start;
+}
+
+/* Transition zones don't snap */
+.transition-zone {
+  scroll-snap-align: none;
+}
