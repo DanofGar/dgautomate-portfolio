@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 export function CoastalOverlook() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden scroll-snap-align-start">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image
