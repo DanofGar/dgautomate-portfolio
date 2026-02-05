@@ -112,7 +112,7 @@ After completing a task, git commit immediately.
 - **Commit:** `chore(cleanup): consolidate plans into specs/`
 
 ### 6. Clean up scripts/
-- **Status:** NOT_STARTED
+- **Status:** COMPLETE
 - **Action:** Review each script in `scripts/`:
   - `generate-hero-image.mjs`
   - `generate-image.sh`
@@ -602,12 +602,60 @@ Remaining warnings after fix (if any):
 ```
 
 ### Scripts Assessment
-*(Agent fills this in during Task 6)*
+*(Completed 2026-02-05)*
 
+**KEEP (useful for ASSETS phase):**
 ```
-Script: [filename]
-  Purpose: [what it does]
-  Still relevant: [yes|no]
-  Reason: [why keep or archive]
-  Action: [keep|archive]
+Script: generate-zone-background.py
+  Purpose: Generate zone backgrounds using Google genai
+  Still relevant: YES
+  Action: KEEP
+
+Script: generate-zone-scenes.py
+  Purpose: Generate zone scene assets
+  Still relevant: YES
+  Action: KEEP
+
+Script: generate-with-imagen4.py
+  Purpose: Imagen 4 API wrapper
+  Still relevant: YES
+  Action: KEEP
+
+Script: test-imagen.py
+  Purpose: Test Google AI API access
+  Still relevant: YES
+  Action: KEEP
+
+Script: screenshot-audit.mjs
+  Purpose: Take screenshots for audit
+  Still relevant: YES
+  Action: KEEP
+
+Script: take-zone-screenshots.sh
+  Purpose: Batch zone screenshots
+  Still relevant: YES
+  Action: KEEP
+
+Script: generate-hero-image.mjs
+  Purpose: Generate hero image
+  Still relevant: YES (may need update)
+  Action: KEEP
+
+Script: generate-image.sh
+  Purpose: Shell wrapper for image gen
+  Still relevant: YES
+  Action: KEEP
+```
+
+**ARCHIVED (wildlife no longer needed):**
+```
+Script: generate-realistic-wildlife.py
+  Purpose: Generate realistic wildlife images
+  Still relevant: NO (wildlife archived)
+  Action: ARCHIVE → scripts/archive/
+
+Script: generate-wildlife-sprite.py
+  Purpose: Generate wildlife sprites
+  Still relevant: NO (wildlife archived)
+  Action: ARCHIVE → scripts/archive/
 ```
