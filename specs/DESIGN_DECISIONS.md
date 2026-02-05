@@ -65,7 +65,38 @@ underground bunker. The cave provides a discovered, narrative-driven transition.
 
 ## Typography
 **Decision:** Playfair Display (or Fraunces) for headings, Source Serif 4 for body.
-Warm white (#F5F0E8) text with multi-layer text-shadow for readability.  
+Warm white (#F5F0E8) text with multi-layer text-shadow for readability.
 **Rationale:** Editorial serif fonts match the cinematic, documentary tone.
-Sans-serif (Inter, etc.) would feel corporate and generic.  
+Sans-serif (Inter, etc.) would feel corporate and generic.
 **Locked:** 2026-02-05
+
+---
+
+## Carried Forward from v2 Plans
+
+### Brand Core (from 2026-02-02 brand document)
+
+**Theme:** Big Sur / Garrapata Trail. Three ecosystems, one journey.
+Warm California coastal vibes - earthy, grounded, with a playful secret underground.
+
+**Tone:** Conversational, warm, human. Professional through craft, not through stiffness.
+
+**Color Zones:**
+| Zone | Colors | Inspiration |
+|------|--------|-------------|
+| Sky | Warm soft blues, creamy whites, hint of golden sun | Coastal California morning |
+| Ground | Tans, terracottas, sage greens, weathered grays | Big Sur terrain |
+| Underground | Rich browns, deep amber, dark soil tones | Redwood root systems |
+| Datacenter | Cool blues, terminal greens, warm lamp lighting | Cozy tech bunker |
+
+**Easter Eggs (Desktop only):**
+- Pickleball
+- Singing
+- Hiking (Garrapata Trail reference)
+
+**Contact Info:**
+- Email: Dnlg2400@gmail.com
+- GitHub: DanofGar
+- Domain: dgautomate.dev
+
+**Out of Scope:** Blog, light mode toggle, CMS, project case studies

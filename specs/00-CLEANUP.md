@@ -94,7 +94,7 @@ After completing a task, git commit immediately.
 - **Commit:** `chore(cleanup): archive legacy planning docs`
 
 ### 5. Consolidate plans/ directory
-- **Status:** NOT_STARTED
+- **Status:** COMPLETE
 - **Action:**
   - Review each file in `docs/plans/`:
     - `2026-02-02-brand-document.md`
