@@ -1,7 +1,7 @@
 # HANDOFF — Portfolio Site for Daniel Garcia
 
 **Last Updated:** 2026-02-05
-**Branch:** `asset/v3-backgrounds`
+**Branch:** `content/narrative-structure`
 **Status:** Visual foundation complete, content structure finalized, copy drafted
 
 ---

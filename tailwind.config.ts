@@ -45,8 +45,8 @@ const config: Config = {
         foreground: "hsl(210, 40%, 98%)",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
+        sans: ["system-ui", "sans-serif"],
+        mono: ["monospace"],
         serif: ["var(--font-playfair)", "Georgia", "serif"],
         body: ["var(--font-source-serif)", "Georgia", "serif"],
       },

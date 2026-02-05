@@ -2,7 +2,7 @@
 # Phase: ASSETS — Generate, Process, Approve All Visual Assets
 
 **Status:** IN_PROGRESS
-**Branch:** `asset/v3-backgrounds`
+**Branch:** `content/narrative-structure`
 **Last Updated:** 2026-02-05 02:45 AM
 
 ---
