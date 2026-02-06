@@ -8,16 +8,16 @@ import { Cave } from '@/components/zones/Cave';
 export default function Home() {
   return (
     <main className="bg-black">
-      {/* Hero - Sky */}
+      {/* Hero */}
       <Sky />
 
-      {/* Story 1 - Forest */}
+      {/* The Paths I've Taken */}
       <Forest />
 
-      {/* Story 2 - Coastal */}
+      {/* Understanding People */}
       <CoastalOverlook />
 
-      {/* Dead End - Cave */}
+      {/* Where I'm Going */}
       <Cave />
     </main>
   );
